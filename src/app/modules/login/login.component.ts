@@ -49,10 +49,7 @@ export class LoginComponent {
   }
   // init Form 
   GoToTheNextRoom() {
-    this.teamService.goToTheNextRoom().subscribe(
-
-    );
-
+    this.teamService.goToTheNextRoom().subscribe();
   }
 
 }
