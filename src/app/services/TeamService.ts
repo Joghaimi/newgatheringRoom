@@ -13,6 +13,6 @@ export class TeamService {
     return this.httpClient.get<any[]>('https://localhost:7248/GatheringRoom');
   }
   goToTheNextRoom() {
-    return this.httpClient.get('https://localhost:7248//GatheringRoom/GoToTheNextRoom');
+    return this.httpClient.get('https://localhost:7248/GatheringRoom/GoToTheNextRoom');
   }
 }

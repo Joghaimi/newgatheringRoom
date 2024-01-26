@@ -19,9 +19,10 @@
                 </ul>
             </div>
 
-            <button type="submit" class="btn btn-primary" (click)="GoToTheNextRoom()"
-                [disabled]="players.length<2 &&teamName.length>0">Start The Game</button>
+            <button class="btn btn-primary" (click)="GoToTheNextRoom()"
+                [disabled]="(players.length<2 )||(teamName.length==0) ">Start The Game</button>
         </div>
+        <!-- [disabled]="players.length>2 &&teamName.length>0"  -->
     </div>
 
 </div>
