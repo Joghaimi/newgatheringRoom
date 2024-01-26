@@ -4,6 +4,7 @@ import { interval, switchMap } from 'rxjs';
 import { Player } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { NgModule } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,41 @@ export class LoginComponent {
 
   }
   ngOnInit(): void {
+
+    interval(1000)
+    .pipe(
+      switchMap(() => this.teamService.getTeamMembers().pipe(
+        catchError(error => {
+          console.error('Error in API call:', error);
+          return []; // Return an empty array or any default value to continue the observable sequence
+        })
+      ))
+    )
+    .subscribe(response => {
+      let newplayers: Player[] = [];
+      response.forEach(
+        e => {
+          let newPlayer: Player = {
+            uid: e,
+            firstName: e,
+            secoundName: e // Assuming it's "secondName" instead of "secoundName"
+          };
+          newplayers.push(newPlayer);
+        }
+      );
+      this.players = newplayers;
+      // Handle the response here
+      console.log(response);
+    });
+
+
+
+
+
+
+
+
+
     interval(1000)
       .pipe(
         switchMap(() => this.teamService.getTeamMembers())
