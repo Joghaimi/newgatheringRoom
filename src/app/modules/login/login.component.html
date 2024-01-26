@@ -5,19 +5,22 @@
                 <div class="col-3 mt-auto">
                     <h5>Enter Team Name</h5>
                 </div>
-                <div class="col-8"><input type="text" class="form-control" placeholder="Name"></div>
+                <div class="col-8"><input type="text" class="form-control" [(ngModel)]="teamName" placeholder="Name">
+                </div>
             </div>
         </div>
         <div class="card-body">
             <h5 class="card-title">Please Scan Your Id</h5>
             <div class="card mt-3 mb-3">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item" *ngFor="let player of players">{{player.firstName +" "
+                    <li class="list-group-item" *ngFor="let player of players;let i=index">{{i+" - "+player.firstName +"
+                        "
                         +player.secoundName}} </li>
                 </ul>
             </div>
 
-            <button type="submit" class="btn btn-primary">Start The Game</button>
+            <button type="submit" class="btn btn-primary" (click)="GoToTheNextRoom()"
+                [disabled]="players.length<2 &&teamName.length>0">Start The Game</button>
         </div>
     </div>
 
