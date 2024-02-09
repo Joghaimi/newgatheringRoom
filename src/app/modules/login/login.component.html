@@ -5,7 +5,11 @@
                 <div class="col-3 mt-auto">
                     <h5>Enter Team Name</h5>
                 </div>
-                <div class="col-8"><input type="text" class="form-control" [(ngModel)]="teamName" placeholder="Name">
+                <div class="col-8">
+                    <!-- <input type='text' ng-model="yourModel" ng-virtual-keyboard/> -->
+                    <!-- <input [matKeyboard]="'Azərbaycanca'"> -->
+
+                    <!-- <input type="text" class="form-control" [(ngModel)]="teamName" placeholder="Name"> -->
                 </div>
             </div>
         </div>
@@ -15,7 +19,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" *ngFor="let player of players;let i=index">{{i+" - "+player.firstName +"
                         "
-                        +player.secoundName}} </li>
+                        +player.lastName}} </li>
                 </ul>
             </div>
 
@@ -26,3 +30,5 @@
     </div>
 
 </div>
+
+

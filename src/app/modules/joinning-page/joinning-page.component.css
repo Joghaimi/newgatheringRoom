@@ -1,0 +1,43 @@
+
+/* component.css */
+.background-container {
+    /* Set the size of the container */
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../../assets/images/backgroundImage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Adjust as needed */
+
+    /* Position the container relative */
+    position: relative;
+}
+
+.background-overlay {
+    /* Set the background color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Gray color with 50% opacity */
+
+    /* Set the size to cover the entire container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.background-image {
+    /* Set the background image using the URL of your image file */
+    background-image: url('../../../assets/images/backgroundImage.jpg');
+    /* Update the path with your image file */
+
+    /* Adjust background properties as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Set the size of the container */
+    width: 100%;
+    height: 100%;
+}

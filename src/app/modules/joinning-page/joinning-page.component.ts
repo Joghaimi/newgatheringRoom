@@ -1,24 +1,28 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { interval, switchMap } from 'rxjs';
 import { Player } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
-import { NgModule } from '@angular/core';
+import { interval, switchMap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-joinning-page',
+  templateUrl: './joinning-page.component.html',
+  styleUrls: ['./joinning-page.component.css']
 })
-export class LoginComponent {
+export class JoinningPageComponent {
+  inTeamStarting = true;
+  teamNameing = false;
+
+
+
+
   title = 'GatheringRoom';
   teamName = "";
   players: Player[] = [
-    // { uid: "123456", firstName: "Ahmad", secoundName: "said" },
-    // { uid: "123456", firstName: "Mohammad", secoundName: "said" },
-    // { uid: "123456", firstName: "hassan", secoundName: "said" },
-    // { uid: "123456", firstName: "Tariq", secoundName: "said" },
+    { uid: "123456", firstName: "Ahmad", lastName: "said" },
+    { uid: "123456", firstName: "Mohammad", lastName: "said" },
+    { uid: "123456", firstName: "hassan", lastName: "said" },
+    { uid: "123456", firstName: "Tariq", lastName: "said" },
   ];
 
   constructor(private teamService: TeamService) {
@@ -42,7 +46,7 @@ export class LoginComponent {
     //         let newPlayer: Player = {
     //           uid: e.id,
     //           firstName: e.firstName,
-    //           lastName: e.lastName 
+    //           lastName: e.lastName
     //         };
     //         newplayers.push(newPlayer);
     //       }
@@ -83,6 +87,13 @@ export class LoginComponent {
     //     console.log(response);
     //   });
   }
+
+  // Save Team Members 
+  SaveTeamMembers() {
+    this.inTeamStarting = false;
+    this.teamNameing = true;
+  }
+
   // init Form 
   GoToTheNextRoom() {
     this.teamService.goToTheNextRoom().subscribe();

@@ -1,0 +1,62 @@
+<!-- component.html -->
+<div class="background-container">
+    <div class="background-overlay"></div>
+    <div class="d-flex align-items-center" style="min-height: 100vh;" *ngIf="inTeamStarting">
+        <div class="container">
+            <div class="card" style="box-shadow: 2px 1px 10px #f0e40f;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-12 mt-auto">
+                            <h5>Please Scan Your Id</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card mt-3 mb-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let player of players; let i=index">{{i +1 + " - " +
+                                player.firstName + " " + player.lastName}}</li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
+                                *ngIf="players.length >2"
+                                style="color: #f0e40f;background-color: black;font-size: 15px;">Create Your
+                                Team</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center" style="min-height: 100vh;" *ngIf="teamNameing">
+        <div class="container">
+            <div class="card" style="box-shadow: 2px 1px 10px #f0e40f;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-12 mt-auto">
+                            <h5>Please Scan Your Id ****</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card mt-3 mb-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let player of players; let i=index">{{i +1 + " - " +
+                                player.firstName + " " + player.lastName}}</li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
+                                *ngIf="players.length >2"
+                                style="color: #f0e40f;background-color: black;font-size: 15px;">Create Your
+                                Team</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
