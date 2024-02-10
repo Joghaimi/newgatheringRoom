@@ -65,28 +65,28 @@ export class JoinningPageComponent {
 
 
 
-    // interval(1000)
-    //   .pipe(
-    //     switchMap(() => this.teamService.getTeamMembers())
-    //   )
-    //   .subscribe(response => {
-    //     let newplayers: Player[] = [];
-    //     response.forEach(
-    //       e => {
-    //         let newPlayer: Player = {
-    //           uid: e.id,
-    //           firstName: e.firstName,
-    //           lastName: e.lastName
+    interval(1000)
+      .pipe(
+        switchMap(() => this.teamService.getTeamMembers())
+      )
+      .subscribe(response => {
+        let newplayers: Player[] = [];
+        response.forEach(
+          e => {
+            let newPlayer: Player = {
+              uid: e.id,
+              firstName: e.firstName,
+              lastName: e.lastName
 
-    //         };
-    //         newplayers.push(newPlayer);
+            };
+            newplayers.push(newPlayer);
 
-    //       }
-    //     );
-    //     this.players = newplayers;
-    //     // Handle the response here
-    //     console.log(response);
-    //   });
+          }
+        );
+        this.players = newplayers;
+        // Handle the response here
+        console.log(response);
+      });
   }
 
   // Save Team Members 
