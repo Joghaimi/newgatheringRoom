@@ -21,10 +21,10 @@ export class JoinningPageComponent {
   title = 'GatheringRoom';
   teamName = "Your Team Name";
   players: Player[] = [
-    { uid: "123456", firstName: "Ahmad", lastName: "said" },
-    { uid: "123456", firstName: "Mohammad", lastName: "said" },
-    { uid: "123456", firstName: "hassan", lastName: "said" },
-    { uid: "123456", firstName: "Tariq", lastName: "said" },
+    { id: "123456", firstName: "Ahmad", lastName: "said" },
+    { id: "123456", firstName: "Mohammad", lastName: "said" },
+    { id: "123456", firstName: "hassan", lastName: "said" },
+    { id: "123456", firstName: "Tariq", lastName: "said" },
   ];
 
   constructor(private teamService: TeamService) {
@@ -100,7 +100,7 @@ export class JoinningPageComponent {
     this.inTeamStarting = false;
     this.teamNameing = false;
     this.loading = true;
-    interval(1000)
+    interval(3000)
       .pipe(
         switchMap(() => this.teamService.isOccupied())
       )
@@ -116,6 +116,7 @@ export class JoinningPageComponent {
               this.inTeamStarting = true;
               this.teamNameing = false;
               this.loading = false;
+              return;
             }
           );
         }
