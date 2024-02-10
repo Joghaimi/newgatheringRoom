@@ -97,38 +97,24 @@ export class JoinningPageComponent {
     this.teamService.isOccupied().subscribe(e => console.log(e));
   }
   SaveTeamName() {
-    let sendRequest = true;
     this.inTeamStarting = false;
     this.teamNameing = false;
     this.loading = true;
     let continueRequest = true; // Flag to control whether to continue the request
-    while (sendRequest) {
-      setTimeout(() => {
-        this.teamService.isOccupied().subscribe(
-          response => {
-            console.log(".");
-            if (!response) {
-              sendRequest = false;
-              // Open Next Room Page 
-              let team: Team = {
-                name: this.teamName,
-                player: this.players,
-              }
-              this.teamService.sendScoreToNextRoom(team).subscribe(
-                e => {
-                  this.inTeamStarting = true;
-                  this.teamNameing = false;
-                  this.loading = false;
-                  
-                  return;
-                }
-              );
-            }
+
+    let interval = setInterval(() => {
+
+      this.teamService.isOccupied().subscribe(
+        response => {
+          if (!response) {
             console.log(response);
+            clearInterval(interval);
           }
-        )
-      }, 3000);
-    }
+        }
+      );
+    }, 3000);
+
+
     // interval(3000)
     //   .pipe(
     //     switchMap(() => this.teamService.isOccupied()
@@ -140,7 +126,7 @@ export class JoinningPageComponent {
     //   .subscribe(response => {
     //     if (!response) {
     //       continueRequest = false; // Stop further requests
-    //       // subscription.unsubscribe();
+
     //       // Open Next Room Page 
     //       let team: Team = {
     //         name: this.teamName,
