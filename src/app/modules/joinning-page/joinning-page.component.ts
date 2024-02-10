@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap } from 'rxjs';
-import { catchError,takeWhile  } from 'rxjs/operators';
+import { catchError, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-joinning-page',
@@ -97,32 +97,66 @@ export class JoinningPageComponent {
     this.teamService.isOccupied().subscribe(e => console.log(e));
   }
   SaveTeamName() {
+    let sendRequest = true;
     this.inTeamStarting = false;
     this.teamNameing = false;
     this.loading = true;
-    interval(3000)
-      .pipe(
-        switchMap(() => this.teamService.isOccupied()),
-        takeWhile(response => !response) 
-      )
-      .subscribe(response => {
-        if (!response) {
-          // Open Next Room Page 
-          let team: Team = {
-            name: this.teamName,
-            player: this.players,
-          }
-          this.teamService.sendScoreToNextRoom(team).subscribe(
-            e => {
-              this.inTeamStarting = true;
-              this.teamNameing = false;
-              this.loading = false;
-              return;
+    let continueRequest = true; // Flag to control whether to continue the request
+    while (sendRequest) {
+      setTimeout(() => {
+        this.teamService.isOccupied().subscribe(
+          response => {
+            if (!response) {
+              continueRequest = false; // Stop further requests
+              // subscription.unsubscribe();
+              // Open Next Room Page 
+              let team: Team = {
+                name: this.teamName,
+                player: this.players,
+              }
+              this.teamService.sendScoreToNextRoom(team).subscribe(
+                e => {
+                  this.inTeamStarting = true;
+                  this.teamNameing = false;
+                  this.loading = false;
+                  sendRequest = false;
+                  return;
+                }
+              );
             }
-          );
-        }
-        console.log(response);
-      });
+            console.log(response);
+          }
+        )
+      }, 3000);
+    }
+    // interval(3000)
+    //   .pipe(
+    //     switchMap(() => this.teamService.isOccupied()
+
+    //     ),
+    //     takeWhile(response => !response),
+
+    //   )
+    //   .subscribe(response => {
+    //     if (!response) {
+    //       continueRequest = false; // Stop further requests
+    //       // subscription.unsubscribe();
+    //       // Open Next Room Page 
+    //       let team: Team = {
+    //         name: this.teamName,
+    //         player: this.players,
+    //       }
+    //       this.teamService.sendScoreToNextRoom(team).subscribe(
+    //         e => {
+    //           this.inTeamStarting = true;
+    //           this.teamNameing = false;
+    //           this.loading = false;
+    //           return;
+    //         }
+    //       );
+    //     }
+    //     console.log(response);
+    //   });
 
 
 
