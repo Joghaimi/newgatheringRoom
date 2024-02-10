@@ -36,23 +36,23 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-12 mt-auto">
-                            <h5>Please Scan Your Id ****</h5>
+                            <h5>Your Team Name</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card mt-3 mb-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" *ngFor="let player of players; let i=index">{{i +1 + " - " +
-                                player.firstName + " " + player.lastName}}</li>
-                        </ul>
+                    <div class="card mt-3 mb-4">
+                        <input type="text" class="form-control" 
+                        
+                        
+                        [(ngModel)]="teamName" placeholder="Name" >
+                        <!-- (click)="require('child_process').exec('matchbox-keyboard');" -->
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
                                 *ngIf="players.length >2"
-                                style="color: #f0e40f;background-color: black;font-size: 15px;">Create Your
-                                Team</button>
+                                style="color: #f0e40f;background-color: black;font-size: 15px;">Start The Game</button>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <!-- Count Down -->
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="true">
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="time">
         <div class="container">
             <div class="card" style="box-shadow: 0px 0px 8px #f0e40f;">
                 <div class="row justify-content-center">
