@@ -17,6 +17,6 @@ export class TeamService {
   }
   isOccupied() {
     console.log("ISSend")
-    return this.httpClient.get('https://localhost:7248/api/FortRoom/IsOccupied');
+    return this.httpClient.get('https://foort.local:7248/api/FortRoom/IsOccupied');
   }
 }
