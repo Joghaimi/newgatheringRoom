@@ -1,0 +1,21 @@
+/*  */
+
+svg {
+  fill: rgba (0,0,0,0.0001);
+}
+
+svg circle {
+  stroke-dasharray: 440px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 11px;
+  fill-opacity: 0.01;
+  /* animation: countdown 120s linear forwards; */
+  stroke: orange;
+}
+
+@keyframes countdown {
+  to {
+    stroke-dashoffset: -440px;
+  }
+}

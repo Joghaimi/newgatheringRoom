@@ -10,14 +10,14 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./joinning-page.component.css']
 })
 export class JoinningPageComponent {
-  inTeamStarting = true;
+  inTeamStarting = false;
   teamNameing = false;
-
-
-
+  strockColor="green"
+  duration=20;
+  currentTime =0;
 
   title = 'GatheringRoom';
-  teamName = "";
+  teamName = "Your Team Name";
   players: Player[] = [
     { uid: "123456", firstName: "Ahmad", lastName: "said" },
     { uid: "123456", firstName: "Mohammad", lastName: "said" },
@@ -97,6 +97,9 @@ export class JoinningPageComponent {
   // init Form 
   GoToTheNextRoom() {
     this.teamService.goToTheNextRoom().subscribe();
+  }
+  receiveTime($event: number){
+    this.currentTime =$event
   }
 
 }
