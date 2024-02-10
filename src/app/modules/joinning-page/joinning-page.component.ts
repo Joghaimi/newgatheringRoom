@@ -107,43 +107,22 @@ export class JoinningPageComponent {
       this.teamService.isOccupied().subscribe(
         response => {
           if (!response) {
-            console.log(response);
-            clearInterval(interval);
+            let team: Team = {
+              name: this.teamName,
+              player: this.players,
+            }
+            this.teamService.sendScoreToNextRoom(team).subscribe(
+              e => {
+                this.inTeamStarting = true;
+                this.teamNameing = false;
+                this.loading = false;
+                clearInterval(interval);
+              }
+            );
           }
         }
       );
     }, 3000);
-
-
-    // interval(3000)
-    //   .pipe(
-    //     switchMap(() => this.teamService.isOccupied()
-
-    //     ),
-    //     takeWhile(response => !response),
-
-    //   )
-    //   .subscribe(response => {
-    //     if (!response) {
-    //       continueRequest = false; // Stop further requests
-
-    //       // Open Next Room Page 
-    //       let team: Team = {
-    //         name: this.teamName,
-    //         player: this.players,
-    //       }
-    //       this.teamService.sendScoreToNextRoom(team).subscribe(
-    //         e => {
-    //           this.inTeamStarting = true;
-    //           this.teamNameing = false;
-    //           this.loading = false;
-    //           return;
-    //         }
-    //       );
-    //     }
-    //     console.log(response);
-    //   });
-
 
 
 
