@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 export class JoinningPageComponent {
   inTeamStarting = true;
   teamNameing = false;
+  loading = false;
   time = false;
   strockColor = "green"
   duration = 20;
@@ -95,7 +96,11 @@ export class JoinningPageComponent {
     this.teamNameing = true;
     this.teamService.isOccupied().subscribe(e => console.log(e));
   }
-
+  SaveTeamName(){
+    this.inTeamStarting = false;
+    this.teamNameing = false;
+    this.loading =true;
+  }
   // init Form 
   GoToTheNextRoom() {
     this.teamService.goToTheNextRoom().subscribe();

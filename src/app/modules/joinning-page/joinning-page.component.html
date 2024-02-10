@@ -42,15 +42,12 @@
                 </div>
                 <div class="card-body">
                     <div class="card mt-3 mb-4">
-                        <input type="text" class="form-control" 
-                        
-                        
-                        [(ngModel)]="teamName" placeholder="Name" >
+                        <input type="text" class="form-control" [(ngModel)]="teamName" placeholder="Name">
                         <!-- (click)="require('child_process').exec('matchbox-keyboard');" -->
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
+                            <button class="col-12 btn font-weight-bold" (click)="SaveTeamName()"
                                 *ngIf="players.length >2"
                                 style="color: #f0e40f;background-color: black;font-size: 15px;">Start The Game</button>
                         </div>
@@ -92,4 +89,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Spinner -->
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="loading">
+        <div class="container">
+            <div class="card" style="box-shadow: 0px 0px 8px #f0e40f;">
+                <br>
+                <br>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center mt-1">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row justify-content-center">
+                    <div class="col-4 mt-4 ps-4">
+                        <app-circular-countdown class="col ms-5" [duration]="duration"
+                            (currentTimeChange)="receiveTime($event)"></app-circular-countdown>
+                    </div>
+                    <div class="col-8 mt-4 ps-4 pt-2">
+                        <div class="row">
+                            <div class="col-12" style="font-weight: bold;font-size: 18px;">Fort Room</div>
+                        </div>
+                        <div class="row pt-4">
+                            <div class="col-12"><span style="font-weight: bold">Team :</span> {{teamName}}</div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-12"><span style="font-weight: bold">Score :</span> 30</div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-12"><span style="font-weight: bold">Remaining Time :</span> {{duration -
+                                currentTime}}
+                                s</div>
+                        </div>
+
+                    </div>
+                </div> -->
+                <br>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>
