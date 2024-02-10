@@ -96,10 +96,32 @@ export class JoinningPageComponent {
     this.teamNameing = true;
     this.teamService.isOccupied().subscribe(e => console.log(e));
   }
-  SaveTeamName(){
+  SaveTeamName() {
     this.inTeamStarting = false;
     this.teamNameing = false;
-    this.loading =true;
+    this.loading = true;
+    interval(1000)
+      .pipe(
+        switchMap(() => this.teamService.isOccupied())
+      )
+      .subscribe(response => {
+        if (response) {
+          // Open Next Room Page 
+          this.teamService.goToTheNextRoom().subscribe(
+            e => {
+              this.inTeamStarting = true;
+              this.teamNameing = false;
+              this.loading = false;
+            }
+          );
+        }
+
+        console.log(response);
+      });
+
+
+
+
   }
   // init Form 
   GoToTheNextRoom() {
