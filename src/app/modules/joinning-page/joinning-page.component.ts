@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Player } from 'src/app/models/player';
+import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -107,7 +107,11 @@ export class JoinningPageComponent {
       .subscribe(response => {
         if (!response) {
           // Open Next Room Page 
-          this.teamService.goToTheNextRoom().subscribe(
+          let team: Team = {
+            name: this.teamName,
+            player: this.players,
+          }
+          this.teamService.sendScoreToNextRoom(team).subscribe(
             e => {
               this.inTeamStarting = true;
               this.teamNameing = false;
@@ -123,10 +127,7 @@ export class JoinningPageComponent {
 
 
   }
-  // init Form 
-  GoToTheNextRoom() {
-    this.teamService.goToTheNextRoom().subscribe();
-  }
+
   receiveTime($event: number) {
     this.currentTime = $event
   }
