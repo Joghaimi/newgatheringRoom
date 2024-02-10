@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError,takeWhile  } from 'rxjs/operators';
 
 @Component({
   selector: 'app-joinning-page',
@@ -102,7 +102,8 @@ export class JoinningPageComponent {
     this.loading = true;
     interval(3000)
       .pipe(
-        switchMap(() => this.teamService.isOccupied())
+        switchMap(() => this.teamService.isOccupied()),
+        takeWhile(response => !response) 
       )
       .subscribe(response => {
         if (!response) {
@@ -120,7 +121,6 @@ export class JoinningPageComponent {
             }
           );
         }
-
         console.log(response);
       });
 
