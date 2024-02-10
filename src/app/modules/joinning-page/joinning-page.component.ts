@@ -3,6 +3,7 @@ import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap } from 'rxjs';
 import { catchError, takeWhile } from 'rxjs/operators';
+import Keyboard from "simple-keyboard";
 
 @Component({
   selector: 'app-joinning-page',
@@ -10,14 +11,14 @@ import { catchError, takeWhile } from 'rxjs/operators';
   styleUrls: ['./joinning-page.component.css']
 })
 export class JoinningPageComponent {
-  inTeamStarting = true;
+  inTeamStarting = false;
   teamNameing = false;
   loading = false;
-  time = false;
+  time = true;
   strockColor = "green"
   duration = 20;
   currentTime = 0;
-
+  keyboard!: Keyboard;
   title = 'GatheringRoom';
   teamName = "Your Team Name";
   players: Player[] = [
@@ -100,10 +101,7 @@ export class JoinningPageComponent {
     this.inTeamStarting = false;
     this.teamNameing = false;
     this.loading = true;
-    let continueRequest = true; // Flag to control whether to continue the request
-
     let interval = setInterval(() => {
-
       this.teamService.isOccupied().subscribe(
         response => {
           if (!response) {
@@ -123,13 +121,42 @@ export class JoinningPageComponent {
         }
       );
     }, 3000);
-
-
-
   }
 
   receiveTime($event: number) {
     this.currentTime = $event
   }
 
+
+  // === Keyboard
+  ngAfterViewInit() {
+    this.keyboard = new Keyboard({
+      onChange: input => this.onChange(input),
+      onKeyPress: button => this.onKeyPress(button)
+    });
+  }
+
+  onChange = (input: string) => {
+    this.teamName = input;
+    console.log("Input changed", input);
+  };
+
+  onKeyPress = (button: string) => {
+    console.log("Button pressed", button);
+
+    if (button === "{shift}" || button === "{lock}") this.handleShift();
+  };
+
+  onInputChange = (event: any) => {
+    this.keyboard.setInput(event.target.value);
+  };
+
+  handleShift = () => {
+    let currentLayout = this.keyboard.options.layoutName;
+    let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+    this.keyboard.setOptions({
+      layoutName: shiftToggle
+    });
+  };
 }

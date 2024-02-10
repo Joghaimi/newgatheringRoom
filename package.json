@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.1.0",
+    "@angular/cdk": "^17.1.2",
     "@angular/common": "^16.1.0",
     "@angular/compiler": "^16.1.0",
     "@angular/core": "^16.1.0",
@@ -19,8 +20,11 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "bootstrap": "^5.3.2",
+    "jquery": "^3.7.1",
     "ng-virtual-keyboard": "^0.4.0",
+    "ngx-touch-keyboard": "^3.1.0",
     "rxjs": "~7.8.0",
+    "simple-keyboard": "^3.7.55",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
