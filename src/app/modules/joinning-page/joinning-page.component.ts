@@ -106,9 +106,9 @@ export class JoinningPageComponent {
       setTimeout(() => {
         this.teamService.isOccupied().subscribe(
           response => {
+            console.log(".");
             if (!response) {
-              continueRequest = false; // Stop further requests
-              // subscription.unsubscribe();
+              sendRequest = false;
               // Open Next Room Page 
               let team: Team = {
                 name: this.teamName,
@@ -119,7 +119,7 @@ export class JoinningPageComponent {
                   this.inTeamStarting = true;
                   this.teamNameing = false;
                   this.loading = false;
-                  sendRequest = false;
+                  
                   return;
                 }
               );
