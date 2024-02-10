@@ -10,13 +10,13 @@ export class TeamService {
   constructor(private httpClient: HttpClient) { }
   getTeamMembers(): Observable<any[]> {
     console.log("Send")
-    return this.httpClient.get<any[]>('raspberrypi.local:5000/GatheringRoom/getThePlayers');
+    return this.httpClient.get<any[]>('https://raspberrypi.local:7248/GatheringRoom/getThePlayers');
   }
   goToTheNextRoom() {
-    return this.httpClient.get('raspberrypi.local:5000/GatheringRoom/GoToTheNextRoom');
+    return this.httpClient.get('https://raspberrypi.local:7248/GatheringRoom/GoToTheNextRoom');
   }
   isOccupied() {
     console.log("ISSend")
-    return this.httpClient.get('https://foort.local:7248/api/FortRoom/IsOccupied');
+    return this.httpClient.get('https://localhost:7248/api/FortRoom/IsOccupied');
   }
 }
