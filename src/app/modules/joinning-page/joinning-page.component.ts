@@ -105,7 +105,7 @@ export class JoinningPageComponent {
         switchMap(() => this.teamService.isOccupied())
       )
       .subscribe(response => {
-        if (response) {
+        if (!response) {
           // Open Next Room Page 
           this.teamService.goToTheNextRoom().subscribe(
             e => {
