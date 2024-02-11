@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-// import Keyboard from "simple-keyboard";
+import Keyboard from "simple-keyboard";
 
 @Component({
   selector: 'app-root',
