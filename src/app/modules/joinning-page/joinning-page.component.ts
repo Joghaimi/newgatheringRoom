@@ -18,7 +18,7 @@ export class JoinningPageComponent {
   strockColor = "green"
   duration = 20;
   currentTime = 0;
-  keyboard!: Keyboard;
+  // keyboard!: Keyboard;
   title = 'GatheringRoom';
   teamName = "Your Team Name";
   players: Player[] = [
@@ -129,34 +129,34 @@ export class JoinningPageComponent {
 
 
   // === Keyboard
-  ngAfterViewInit() {
-    this.keyboard = new Keyboard({
-      onChange: input => this.onChange(input),
-      onKeyPress: button => this.onKeyPress(button)
-    });
-  }
+  // ngAfterViewInit() {
+  //   this.keyboard = new Keyboard({
+  //     onChange: input => this.onChange(input),
+  //     onKeyPress: button => this.onKeyPress(button)
+  //   });
+  // }
 
   onChange = (input: string) => {
     this.teamName = input;
     console.log("Input changed", input);
   };
 
-  onKeyPress = (button: string) => {
-    console.log("Button pressed", button);
+  // onKeyPress = (button: string) => {
+  //   console.log("Button pressed", button);
 
-    if (button === "{shift}" || button === "{lock}") this.handleShift();
-  };
+  //   if (button === "{shift}" || button === "{lock}") this.handleShift();
+  // };
 
-  onInputChange = (event: any) => {
-    this.keyboard.setInput(event.target.value);
-  };
+  // onInputChange = (event: any) => {
+  //   this.keyboard.setInput(event.target.value);
+  // };
 
-  handleShift = () => {
-    let currentLayout = this.keyboard.options.layoutName;
-    let shiftToggle = currentLayout === "default" ? "shift" : "default";
+  // handleShift = () => {
+  //   let currentLayout = this.keyboard.options.layoutName;
+  //   let shiftToggle = currentLayout === "default" ? "shift" : "default";
 
-    this.keyboard.setOptions({
-      layoutName: shiftToggle
-    });
-  };
+  //   this.keyboard.setOptions({
+  //     layoutName: shiftToggle
+  //   });
+  // };
 }
