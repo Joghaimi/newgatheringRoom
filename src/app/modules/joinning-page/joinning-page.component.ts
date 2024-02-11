@@ -3,7 +3,7 @@ import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap } from 'rxjs';
 import { catchError, takeWhile } from 'rxjs/operators';
-import Keyboard from "simple-keyboard";
+// import Keyboard from "simple-keyboard";
 
 @Component({
   selector: 'app-joinning-page',
