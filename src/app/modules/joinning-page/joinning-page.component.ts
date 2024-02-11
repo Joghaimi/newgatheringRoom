@@ -11,10 +11,10 @@ import Keyboard from "simple-keyboard";
   styleUrls: ['./joinning-page.component.css']
 })
 export class JoinningPageComponent {
-  inTeamStarting = false;
+  inTeamStarting = true;
   teamNameing = false;
   loading = false;
-  time = true;
+  time = false;
   strockColor = "green"
   duration = 20;
   currentTime = 0;
