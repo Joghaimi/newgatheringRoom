@@ -10,7 +10,7 @@ export class TeamService {
 
   constructor(private httpClient: HttpClient) { }
   getTeamMembers(): Observable<any[]> {
-    return this.httpClient.get<any[]>('https://raspberrypi.local:7248/GatheringRoom/getThePlayers');
+    return this.httpClient.get<any[]>('https://gathering.local:7248/GatheringRoom/getThePlayers');
   }
   // sendTeamInfo(){
   //   return this.httpClient.get('https://foort.local:7248/api/FortRoom/IsOccupied');
