@@ -11,29 +11,30 @@ import Keyboard from "simple-keyboard";
   styleUrls: ['./joinning-page.component.css']
 })
 export class JoinningPageComponent {
-  inTeamStarting = true;
+  score = 0;
+  inTeamStarting = false;
   teamNameing = false;
   loading = false;
-  time = false;
+  time = true;
   strockColor = "green"
   duration = 20;
   currentTime = 0;
   keyboard!: Keyboard;
   title = 'GatheringRoom';
-  teamName = "Your Team Name";
+  teamName = "Enter Your Team Name";
   players: Player[] = [
-    // { id: "123456", firstName: "Ahmad", lastName: "said" },
-    // { id: "123456", firstName: "Mohammad", lastName: "said" },
-    // { id: "123456", firstName: "hassan", lastName: "said" },
-    // { id: "123456", firstName: "Tariq", lastName: "said" },
+    { id: "123456", firstName: "Ahmad", lastName: "said" },
+    { id: "123456", firstName: "Mohammad", lastName: "said" },
+    { id: "123456", firstName: "hassan", lastName: "said" },
+    { id: "123456", firstName: "Tariq", lastName: "said" },
   ];
 
   constructor(private teamService: TeamService) {
 
   }
   ngOnInit(): void {
-
-    interval(1000)
+    if (this.teamNameing) {
+      interval(1000)
       .pipe(
         switchMap(() => this.teamService.getTeamMembers().pipe(
           catchError(error => {
@@ -59,36 +60,7 @@ export class JoinningPageComponent {
         console.log(response);
       });
 
-
-
-
-
-
-
-
-
-    // interval(1000)
-    //   .pipe(
-    //     switchMap(() => this.teamService.getTeamMembers())
-    //   )
-    //   .subscribe(response => {
-    //     let newplayers: Player[] = [];
-    //     response.forEach(
-    //       e => {
-    //         let newPlayer: Player = {
-    //           uid: e.id,
-    //           firstName: e.firstName,
-    //           lastName: e.lastName
-
-    //         };
-    //         newplayers.push(newPlayer);
-
-    //       }
-    //     );
-    //     this.players = newplayers;
-    //     // Handle the response here
-    //     console.log(response);
-    //   });
+    }
   }
 
   // Save Team Members 
@@ -143,7 +115,6 @@ export class JoinningPageComponent {
 
   onKeyPress = (button: string) => {
     console.log("Button pressed", button);
-
     if (button === "{shift}" || button === "{lock}") this.handleShift();
   };
 
