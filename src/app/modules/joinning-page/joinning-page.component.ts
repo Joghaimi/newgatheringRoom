@@ -30,7 +30,7 @@ export class JoinningPageComponent {
 
   }
   ngOnInit(): void {
-    if (this.teamNameing) {
+    if (this.inTeamStarting) {
       interval(1000)
       .pipe(
         switchMap(() => this.teamService.getTeamMembers().pipe(
