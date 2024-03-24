@@ -17,7 +17,8 @@ import { CircularCountdownComponent } from './circular-countdown/circular-countd
     LoginComponent,
     JoinningPageComponent,
     CreateTeamComponent,
-    CircularCountdownComponent
+    CircularCountdownComponent,
+    
   ],
   imports: [
     BrowserModule,

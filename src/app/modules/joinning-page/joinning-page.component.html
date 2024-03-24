@@ -24,10 +24,10 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-4"></div>
-                    <div class="col-4">
-                        <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
+                    <div class="col-4 button-container">
+                        <button type="button" class="col-12 btn font-weight-bold cursor-pointer" (click)="SaveTeamMembers()"
                             *ngIf="players.length >2"
-                            style="color: #f0e40f;background-color: blue;font-size: 15px;">Create Your
+                            style="color: #f0e40f;background-color: blue;font-size: 15px;z-index: 99;">Create Your
                             Team</button>
                     </div>
                     <div class="col-4"></div>
@@ -57,7 +57,7 @@
                         </ul>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 button-container">
                             <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
                                 *ngIf="players.length >2"
                                 style="color: #f0e40f;background-color: blue;font-size: 15px;">Create Your

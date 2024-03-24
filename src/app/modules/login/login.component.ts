@@ -15,10 +15,10 @@ export class LoginComponent {
   title = 'GatheringRoom';
   teamName = "";
   players: Player[] = [
-    // { uid: "123456", firstName: "Ahmad", secoundName: "said" },
-    // { uid: "123456", firstName: "Mohammad", secoundName: "said" },
-    // { uid: "123456", firstName: "hassan", secoundName: "said" },
-    // { uid: "123456", firstName: "Tariq", secoundName: "said" },
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
   ];
 
   constructor(private teamService: TeamService) {
@@ -85,6 +85,7 @@ export class LoginComponent {
   }
   // init Form 
   GoToTheNextRoom() {
+    alert("test");
     // this.teamService.goToTheNextRoom().subscribe();
   }
 
