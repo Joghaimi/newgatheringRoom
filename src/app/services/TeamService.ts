@@ -12,6 +12,9 @@ export class TeamService {
   getTeamMembers(): Observable<any[]> {
     return this.httpClient.get<any[]>('https://gathering.local:7248/GatheringRoom/getThePlayers');
   }
+  clearGatheringRoomMember(){
+    return this.httpClient.get('https://gathering.local:7248/api/GatheringRoom/GoToTheNextRoom');
+  }
   // sendTeamInfo(){
   //   return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsOccupied');
   // }
