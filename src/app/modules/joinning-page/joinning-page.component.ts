@@ -115,7 +115,7 @@ export class JoinningPageComponent {
                 this.loading = false;
                 this.teamService.clearGatheringRoomMember().subscribe(
                   res=>{
-
+                    this.teamName= "Enter Your Team Name";
                   }
                 );
                 clearInterval(interval);
