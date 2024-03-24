@@ -23,7 +23,10 @@ export class JoinningPageComponent {
   title = 'GatheringRoom';
   teamName = "Enter Your Team Name";
   players: Player[] = [
-
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
+    {firstName:"ahmad", lastName:"said"},
   ];
 
   constructor(private teamService: TeamService) {
