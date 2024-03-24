@@ -13,12 +13,12 @@ export class TeamService {
     return this.httpClient.get<any[]>('https://gathering.local:7248/GatheringRoom/getThePlayers');
   }
   // sendTeamInfo(){
-  //   return this.httpClient.get('https://foort.local:7248/api/FortRoom/IsOccupied');
+  //   return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsOccupied');
   // }
   sendScoreToNextRoom(team:Team) {
-    return this.httpClient.post('https://foort.local:7248/api/FortRoom/ReceiveScore',team);
+    return this.httpClient.post('https://fort.local:7248/api/FortRoom/ReceiveScore',team);
   }
   isOccupied() {
-    return this.httpClient.get('https://foort.local:7248/api/FortRoom/IsOccupied');
+    return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsOccupied');
   }
 }

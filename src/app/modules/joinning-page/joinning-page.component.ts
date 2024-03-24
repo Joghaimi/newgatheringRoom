@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
-import { interval, switchMap } from 'rxjs';
+import { interval, switchMap, Subject } from 'rxjs';
 import { catchError, takeWhile } from 'rxjs/operators';
 import Keyboard from "simple-keyboard";
 
@@ -23,19 +23,48 @@ export class JoinningPageComponent {
   title = 'GatheringRoom';
   teamName = "Enter Your Team Name";
   players: Player[] = [
-    {firstName:"ahmad", lastName:"said"},
-    {firstName:"ahmad", lastName:"said"},
-    {firstName:"ahmad", lastName:"said"},
-    {firstName:"ahmad", lastName:"said"},
+    { firstName: "ahmad", lastName: "said" },
+    { firstName: "ahmad", lastName: "said" },
+    { firstName: "ahmad", lastName: "said" },
+    { firstName: "ahmad", lastName: "said" },
   ];
+  private stopInterval$ = new Subject<void>();
 
   constructor(private teamService: TeamService) {
 
   }
   ngOnInit(): void {
-    if (this.inTeamStarting) {
-      interval(1000)
+    // if (this.inTeamStarting) {
+    //   interval(1000)
+    //   .pipe(
+    //     switchMap(() => this.teamService.getTeamMembers().pipe(
+    //       catchError(error => {
+    //         console.error('Error in API call:', error);
+    //         return []; // Return an empty array or any default value to continue the observable sequence
+    //       })
+    //     ))
+    //   )
+    //   .subscribe(response => {
+    //     let newplayers: Player[] = [];
+    //     response.forEach(
+    //       e => {
+    //         let newPlayer: Player = {
+    //           id: e.id,
+    //           firstName: e.firstName,
+    //           lastName: e.lastName
+    //         };
+    //         newplayers.push(newPlayer);
+    //       }
+    //     );
+    //     this.players = newplayers;
+    //     // Handle the response here
+    //   });
+
+    // }
+    interval(1000)
       .pipe(
+        // Stop the interval when the stopInterval$ emits a value
+        takeWhile(() => !this.stopInterval$.closed),
         switchMap(() => this.teamService.getTeamMembers().pipe(
           catchError(error => {
             console.error('Error in API call:', error);
@@ -57,17 +86,16 @@ export class JoinningPageComponent {
         );
         this.players = newplayers;
         // Handle the response here
-        console.log(response);
       });
-
-    }
   }
 
   // Save Team Members 
   SaveTeamMembers() {
     this.inTeamStarting = false;
     this.teamNameing = true;
-    this.teamService.isOccupied().subscribe(e => console.log(e));
+
+    this.stopInterval$.next();
+    this.stopInterval$.complete();
   }
   SaveTeamName() {
     this.inTeamStarting = false;
