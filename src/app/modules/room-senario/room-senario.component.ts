@@ -33,16 +33,21 @@ export class RoomSenarioComponent {
     );
   }
   GoToTheNextRoom() {
-
+    // Restart The Game
+    this.gameTotalTime = 90;
   }
   startTimer() {
     let interval = setInterval(() => {
       this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
-        this.isGameFinished =true;
-        this.isGameStarted =false;
+        this.isGameFinished = true;
+        this.isGameStarted = true;
+
         clearInterval(interval);
       }
     }, 1000);
   }
+
+
+
 }

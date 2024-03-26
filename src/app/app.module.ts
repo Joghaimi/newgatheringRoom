@@ -12,6 +12,7 @@ import { CreateTeamComponent } from './modules/create-team/create-team.component
 import { CircularCountdownComponent } from './circular-countdown/circular-countdown.component';
 import { NextRoomComponent } from './modules/next-room/next-room.component';
 import { RoomSenarioComponent } from './modules/room-senario/room-senario.component';
+import { TimeFormatPipe } from './time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RoomSenarioComponent } from './modules/room-senario/room-senario.compon
     CircularCountdownComponent,
     NextRoomComponent,
     RoomSenarioComponent,
+    TimeFormatPipe,
     
   ],
   imports: [
