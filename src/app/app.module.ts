@@ -11,6 +11,7 @@ import { JoinningPageComponent } from './modules/joinning-page/joinning-page.com
 import { CreateTeamComponent } from './modules/create-team/create-team.component';
 import { CircularCountdownComponent } from './circular-countdown/circular-countdown.component';
 import { NextRoomComponent } from './modules/next-room/next-room.component';
+import { RoomSenarioComponent } from './modules/room-senario/room-senario.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NextRoomComponent } from './modules/next-room/next-room.component';
     CreateTeamComponent,
     CircularCountdownComponent,
     NextRoomComponent,
+    RoomSenarioComponent,
     
   ],
   imports: [
