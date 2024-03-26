@@ -1,7 +1,7 @@
 <div class="background-container">
     <div class="background-overlay"></div>
     <!-- Start The Game -->
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="!isGameStarted">
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showStartGame">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-4"></div>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Team Name and Info -->
-    <div class="align-items-center" style="min-height: 100vh;" *ngIf="isGameStarted && !isGameFinished">
+    <div class="align-items-center" style="min-height: 100vh;" *ngIf="showTimerandScore">
 
         <div class="container text-white pt-5">
             <div class="row text-center">
@@ -31,12 +31,11 @@
 
                 </div>
             </div>
-
             <div class="row align-items-center button-container" style="min-height:50vh">
-                <div class="col ps-5" >
+                <div class="col ps-5">
                     <span class="" style="float: inline-start;">
-                        <h3 class="gradient-border-blue text-center px-5" >
-                            Time    
+                        <h3 class="gradient-border-blue text-center px-5">
+                            Time
                         </h3>
                         <h3 class="text-center">
                             {{ gameTotalTime | timeFormat }}
@@ -61,14 +60,12 @@
                     <h3>{{gameName}}</h3>
                 </div>
             </div>
-
-
         </div>
     </div>
 
 
     <!-- Go To The Next Room -->
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="isGameFinished">
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="goToTheNextRoom">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-4"></div>
@@ -84,5 +81,16 @@
     </div>
     <!-- Go To The Next Room Loop -->
 
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showLoading">
+        <div class="container">
+            <div class="d-flex justify-content-center mt-1">
+                <div class="loader" role="status">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
 
 </div>

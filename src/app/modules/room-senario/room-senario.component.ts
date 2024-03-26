@@ -8,14 +8,16 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./room-senario.component.css']
 })
 export class RoomSenarioComponent {
-  isGameStarted = false;
-  isGameFinished = false;
+  showStartGame = true;
+  showTimerandScore = false;
+  goToTheNextRoom = false;
+  showLoading =false;
   teamName = "FromTheRoom"
   gameName = "Game Name"
   gameUrl1 = "fort";
   gameUrl = "fortRoom";
   score = 10;
-  gameTotalTime = 50;
+  gameTotalTime = 3;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
 
@@ -27,7 +29,7 @@ export class RoomSenarioComponent {
     this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
       e => {
         this.team = e;
-        this.isGameStarted = true;
+        this.showStartGame = false;
         this.startTimer();
       }
     );
@@ -35,19 +37,38 @@ export class RoomSenarioComponent {
   GoToTheNextRoom() {
     // Restart The Game
     this.gameTotalTime = 90;
+    this.goToTheNextRoom = false;
+    this.showLoading=true;
+
+    let interval = setInterval(() => {
+      this.teamService.isOccupied().subscribe(
+        response => {
+          if (!response) {
+            this.teamService.sendScoreToNextRoomByName("shooting",this.team).subscribe(
+              e => {
+                this.showLoading=false;
+                this.showStartGame=true;
+                clearInterval(interval);
+              }
+            );
+          }
+        }
+      );
+    }, 3000);
+
+
+
   }
   startTimer() {
+    this.showTimerandScore =true
     let interval = setInterval(() => {
       this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
-        this.isGameFinished = true;
-        this.isGameStarted = true;
-
+        this.showTimerandScore = false;
+        this.goToTheNextRoom =true;
         clearInterval(interval);
       }
     }, 1000);
   }
-
-
-
 }
+
