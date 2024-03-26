@@ -50,11 +50,11 @@ export class NextRoomComponent {
 
   }
   startTheGamefn(){
-    this.teamService.startTheGame("shooting").subscribe(
-      e=>{
-        this.startTheGame=false;
-      }
-    );
+    // this.teamService.startTheGame("shooting").subscribe(
+    //   e=>{
+    //     this.startTheGame=false;
+    //   }
+    // );
   }
 
 }
