@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JoinningPageComponent } from './modules/joinning-page/joinning-page.component';
 import { CreateTeamComponent } from './modules/create-team/create-team.component';
 import { CircularCountdownComponent } from './circular-countdown/circular-countdown.component';
+import { NextRoomComponent } from './modules/next-room/next-room.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CircularCountdownComponent } from './circular-countdown/circular-countd
     JoinningPageComponent,
     CreateTeamComponent,
     CircularCountdownComponent,
+    NextRoomComponent,
     
   ],
   imports: [

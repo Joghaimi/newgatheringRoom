@@ -24,4 +24,10 @@ export class TeamService {
   isOccupied() {
     return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsOccupied');
   }
+  isOccupiedByName(roomName:string) {
+    return this.httpClient.get('https://fort.local:7248/api/'+roomName+'/IsOccupied');
+  }
+  sendScoreToNextRoomByName(roomName:string,team:Team) {
+    return this.httpClient.post('https://fort.local:7248/api/'+roomName+'/ReceiveScore',team);
+  }
 }
