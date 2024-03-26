@@ -9,6 +9,7 @@ import { TeamService } from 'src/app/services/TeamService';
 })
 export class NextRoomComponent {
   loading = false;
+  startTheGame=false;
   teamName = "Enter Your Team Name";
   players: Player[] = [
     // { firstName: "ahmad", lastName: "said" },
@@ -32,6 +33,7 @@ export class NextRoomComponent {
             this.teamService.sendScoreToNextRoomByName("shooting",team).subscribe(
               e => {
                 this.loading = false;
+                this.startTheGame=true;
                 // To Do
                 // this.teamService.clearGatheringRoomMember().subscribe(
                 //   res => {
@@ -46,6 +48,13 @@ export class NextRoomComponent {
       );
     }, 3000);
 
+  }
+  startTheGamefn(){
+    this.teamService.startTheGame("shooting").subscribe(
+      e=>{
+        this.startTheGame=false;
+      }
+    );
   }
 
 }

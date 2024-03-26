@@ -19,9 +19,15 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="!loading">
+    <div class="row" *ngIf="!loading && !startTheGame">
         <div class="col-12 button-container">
             <button class="col-12 btn font-weight-bold" (click)="goToNextRoom()"
+                style="color: white;background-color: blue;font-size: 15px;">Go To The Next Room</button>
+        </div>
+    </div>
+    <div class="row" *ngIf="startTheGame">
+        <div class="col-12 button-container">
+            <button class="col-12 btn font-weight-bold" (click)="startTheGamefn()"
                 style="color: white;background-color: blue;font-size: 15px;">Start The Game</button>
         </div>
     </div>

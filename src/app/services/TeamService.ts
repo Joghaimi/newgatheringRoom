@@ -30,4 +30,7 @@ export class TeamService {
   sendScoreToNextRoomByName(roomName:string,team:Team) {
     return this.httpClient.post('https://'+roomName+'.local:7248/api/'+roomName+'/ReceiveScore',team);
   }
+  startTheGame(roomName:string) {
+    return this.httpClient.post('https://'+roomName+'.local:7248/api/'+roomName+'/StartStopGame',true);
+  }
 }
