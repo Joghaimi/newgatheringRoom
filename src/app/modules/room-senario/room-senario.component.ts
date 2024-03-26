@@ -41,7 +41,7 @@ export class RoomSenarioComponent {
     this.showLoading=true;
 
     let interval = setInterval(() => {
-      this.teamService.isOccupied().subscribe(
+      this.teamService.isOccupiedByName("shooting").subscribe(
         response => {
           if (!response) {
             this.teamService.sendScoreToNextRoomByName("shooting",this.team).subscribe(
