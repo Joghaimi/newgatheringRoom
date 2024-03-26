@@ -30,7 +30,12 @@ export class RoomSenarioComponent {
       e => {
         this.team = e;
         this.showStartGame = false;
-        this.startTimer();
+        this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
+          e=>{
+            this.startTimer();
+          }
+        );
+        
       }
     );
   }
