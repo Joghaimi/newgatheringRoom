@@ -40,6 +40,7 @@ export class RoomSenarioComponent {
       this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
         this.isGameFinished =true;
+        this.isGameStarted =false;
         clearInterval(interval);
       }
     }, 1000);
