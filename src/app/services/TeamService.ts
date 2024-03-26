@@ -36,7 +36,7 @@ export class TeamService {
     return this.httpClient.post('https://' + roomName1 + '.local:7248/api/' + roomName + '/StartStopGame', true);
   }
   getTeamMembersAndScore(roomName1:string ,roomName: string): Observable<any> {
-    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/ReturnScore');
+    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/ReturnScore ?startGame=true');
   }
 
 }
