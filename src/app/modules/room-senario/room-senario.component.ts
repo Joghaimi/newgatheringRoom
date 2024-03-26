@@ -12,6 +12,7 @@ export class RoomSenarioComponent {
   isGameFinished = false;
   teamName = "FromTheRoom"
   gameName = "Game Name"
+  gameUrl1 = "fort";
   gameUrl = "fortRoom";
   score = 10;
   team:Team={name:"Team Name"};
@@ -20,7 +21,7 @@ export class RoomSenarioComponent {
   }
   startTheGame() {
     // Get Team Info
-    this.teamService.getTeamMembersAndScore(this.gameUrl).subscribe(
+    this.teamService.getTeamMembersAndScore(this.gameUrl1,this.gameUrl).subscribe(
       e => {
         this.team =e;
         this.isGameStarted=true;
