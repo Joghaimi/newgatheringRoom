@@ -12,7 +12,7 @@ export class RoomSenarioComponent {
   isGameFinished = false;
   teamName = "FromTheRoom"
   gameName = "Game Name"
-  gameUrl = "fort";
+  gameUrl = "fortRoom";
   score = 10;
   team:Team={name:"Team Name"};
   constructor(private teamService: TeamService) {
