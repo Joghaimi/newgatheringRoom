@@ -16,7 +16,7 @@ export class DivingRoomComponent {
   teamName = "FromTheRoom"
   gameName = "Diving Room"
   gameUrl1 = "diving";
-  gameUrl = "divingRoom";
+  gameUrl = "diving";
   nextGame = "dark";
   score = 0;
   gameTotalTime = 3;
