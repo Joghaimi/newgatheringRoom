@@ -15,7 +15,7 @@ export class ShootingRoomComponent {
   teamName = "FromTheRoom"
   gameName = "Shooting Room"
   gameUrl1 = "Shooting";
-  gameUrl = "ShootingRoom";
+  gameUrl = "Shooting";
   nextGame = "diving";
   score = 0;
   gameTotalTime = 3;
