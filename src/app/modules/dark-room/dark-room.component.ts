@@ -14,9 +14,9 @@ export class DarkRoomComponent {
   goToTheNextRoom = false;
   showLoading =false;
   teamName = "FromTheRoom"
-  gameName = "Diving Room"
-  gameUrl1 = "diving";
-  gameUrl = "divingRoom";
+  gameName = "Dark Room"
+  gameUrl1 = "dark";
+  gameUrl = "darkRoom";
   nextGame = "dark";
   score = 0;
   gameTotalTime = 3;
