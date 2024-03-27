@@ -9,12 +9,12 @@ import Keyboard from "simple-keyboard";
 export class AppComponent {
   title = 'XO Game';
   value = "";
-  isItGatheringRoom = false;
+  isItGatheringRoom = true;
   isItFortRoom = false;
   isItShootingRoom = false;
   isItDivingRoom = false;
-  isItDarkRoom = true;
-  isItFloorIsLavaRoom = true;
+  isItDarkRoom = false;
+  isItFloorIsLavaRoom = false;
 
 
 
