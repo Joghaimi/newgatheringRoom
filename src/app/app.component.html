@@ -1,3 +1,8 @@
-<!-- <app-joinning-page></app-joinning-page> -->
 <!-- <app-next-room></app-next-room> -->
-<app-room-senario></app-room-senario>
+<app-joinning-page *ngIf="isItGatheringRoom"></app-joinning-page>
+<app-fort-room *ngIf="isItFortRoom"></app-fort-room>
+<app-shooting-room *ngIf="isItShootingRoom"></app-shooting-room>
+<app-diving-room *ngIf="isItDivingRoom"></app-diving-room>
+<app-dark-room *ngIf="isItDarkRoom"></app-dark-room>
+<app-floor-is-lava *ngIf="isItFloorIsLavaRoom"></app-floor-is-lava>
+<!-- <app-room-senario ></app-room-senario> -->

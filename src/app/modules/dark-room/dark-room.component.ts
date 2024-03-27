@@ -3,19 +3,21 @@ import { Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
-  selector: 'app-room-senario',
-  templateUrl: './room-senario.component.html',
-  styleUrls: ['./room-senario.component.css']
+  selector: 'app-dark-room',
+  templateUrl: './dark-room.component.html',
+  styleUrls: ['./dark-room.component.css']
 })
-export class RoomSenarioComponent {
+export class DarkRoomComponent {
+
   showStartGame = true;
   showTimerandScore = false;
   goToTheNextRoom = false;
   showLoading =false;
   teamName = "FromTheRoom"
-  gameName = "Game Name"
-  gameUrl1 = "fort";
-  gameUrl = "fortRoom";
+  gameName = "Diving Room"
+  gameUrl1 = "diving";
+  gameUrl = "divingRoom";
+  nextGame = "dark";
   score = 0;
   gameTotalTime = 3;
   team: Team = { name: "Team Name" };
@@ -44,10 +46,10 @@ export class RoomSenarioComponent {
     this.goToTheNextRoom = false;
     this.showLoading=true;
     let interval = setInterval(() => {
-      this.teamService.isOccupiedByName("shooting").subscribe(
+      this.teamService.isOccupiedByName(this.nextGame).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName("shooting",this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
               e => {
                 this.showLoading=false;
                 this.showStartGame=true;
@@ -70,6 +72,4 @@ export class RoomSenarioComponent {
       }
     }, 1000);
   }
-  
 }
-

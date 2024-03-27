@@ -9,6 +9,16 @@ import Keyboard from "simple-keyboard";
 export class AppComponent {
   title = 'XO Game';
   value = "";
+  isItGatheringRoom = false;
+  isItFortRoom = false;
+  isItShootingRoom = false;
+  isItDivingRoom = false;
+  isItDarkRoom = true;
+  isItFloorIsLavaRoom = true;
+
+
+
+
   // keyboard!: Keyboard;
 
   // ngAfterViewInit() {

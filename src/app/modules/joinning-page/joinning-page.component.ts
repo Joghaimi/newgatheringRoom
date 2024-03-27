@@ -12,10 +12,10 @@ import Keyboard from "simple-keyboard";
 })
 export class JoinningPageComponent {
   score = 0;
-  inTeamStarting = false;
+  inTeamStarting = true;
   teamNameing = false;
   loading = false;
-  time = true;
+  time = false;
   strockColor = "green"
   duration = 20;
   currentTime = 0;
