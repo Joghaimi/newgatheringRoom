@@ -17,7 +17,8 @@ export class DarkRoomComponent {
   gameName = "Dark Room"
   gameUrl1 = "dark";
   gameUrl = "darkRoom";
-  nextGame = "dark";
+  nextGame = "floor";
+  nextGame2 = "floorislava";
   score = 0;
   gameTotalTime = 3;
   team: Team = { name: "Team Name" };
@@ -46,10 +47,10 @@ export class DarkRoomComponent {
     this.goToTheNextRoom = false;
     this.showLoading=true;
     let interval = setInterval(() => {
-      this.teamService.isOccupiedByName(this.nextGame).subscribe(
+      this.teamService.isOccupiedByName2(this.nextGame,this.nextGame2).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName2(this.nextGame,this.nextGame2,this.team).subscribe(
               e => {
                 this.showLoading=false;
                 this.showStartGame=true;
