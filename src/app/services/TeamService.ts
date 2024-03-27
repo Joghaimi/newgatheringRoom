@@ -33,10 +33,10 @@ export class TeamService {
     return this.httpClient.post('https://' + roomName + '.local:7248/api/' + roomName + '/ReceiveScore', team);
   }
   startTheGame(roomName1:string ,roomName: string) {
-    return this.httpClient.post('https://' + roomName1 + '.local:7248/api/' + roomName + '/StartStopGame', true);
+    return this.httpClient.post('https://' + roomName1 + '.local:7248/api/' + roomName + '/StartStopGame?startGame=true', true);
   }
   getTeamMembersAndScore(roomName1:string ,roomName: string): Observable<any> {
-    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/ReturnScore?startGame=true');
+    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/ReturnScore');
   }
 
 }
