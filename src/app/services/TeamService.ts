@@ -29,8 +29,14 @@ export class TeamService {
   isOccupiedByName(roomName: string) {
     return this.httpClient.get('https://' + roomName + '.local:7248/api/' + roomName + '/IsOccupied');
   }
+  isOccupiedByName2(roomName: string ,roomName2: string) {
+    return this.httpClient.get('https://' + roomName + '.local:7248/api/' + roomName2 + '/IsOccupied');
+  }
   sendScoreToNextRoomByName(roomName: string, team: Team) {
     return this.httpClient.post('https://' + roomName + '.local:7248/api/' + roomName + '/ReceiveScore', team);
+  }
+  sendScoreToNextRoomByName2(roomName: string,roomName2: string, team: Team) {
+    return this.httpClient.post('https://' + roomName + '.local:7248/api/' + roomName2 + '/ReceiveScore', team);
   }
   startTheGame(roomName1:string ,roomName: string) {
     return this.httpClient.post('https://' + roomName1 + '.local:7248/api/' + roomName + '/StartStopGame?startGame=true', true);
