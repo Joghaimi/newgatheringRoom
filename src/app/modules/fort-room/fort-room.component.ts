@@ -65,6 +65,15 @@ export class FortRoomComponent {
     this.showTimerandScore =true
     let interval = setInterval(() => {
       this.gameTotalTime--;
+      // Get Score
+
+      this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+        e=>{
+          this.score=e;
+        }
+      );
+
+
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
         this.goToTheNextRoom =true;
