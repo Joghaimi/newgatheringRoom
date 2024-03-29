@@ -11,14 +11,14 @@ export class ShootingRoomComponent {
   showStartGame = true;
   showTimerandScore = false;
   goToTheNextRoom = false;
-  showLoading =false;
+  showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Shooting Room"
   gameUrl1 = "Shooting";
   gameUrl = "Shooting";
   nextGame = "diving";
   score = 0;
-  gameTotalTime = 3;
+  gameTotalTime = 120;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
 
@@ -32,7 +32,7 @@ export class ShootingRoomComponent {
         this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
-          e=>{
+          e => {
             this.startTimer();
           }
         );
@@ -41,17 +41,17 @@ export class ShootingRoomComponent {
   }
   GoToTheNextRoom() {
     // Restart The Game
-    this.gameTotalTime = 90;
+    this.gameTotalTime = 120;
     this.goToTheNextRoom = false;
-    this.showLoading=true;
+    this.showLoading = true;
     let interval = setInterval(() => {
       this.teamService.isOccupiedByName(this.nextGame).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName(this.nextGame, this.team).subscribe(
               e => {
-                this.showLoading=false;
-                this.showStartGame=true;
+                this.showLoading = false;
+                this.showStartGame = true;
                 clearInterval(interval);
               }
             );
@@ -61,12 +61,17 @@ export class ShootingRoomComponent {
     }, 3000);
   }
   startTimer() {
-    this.showTimerandScore =true
+    this.showTimerandScore = true
     let interval = setInterval(() => {
       this.gameTotalTime--;
+      this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          this.score = e;
+        }
+      );
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
-        this.goToTheNextRoom =true;
+        this.goToTheNextRoom = true;
         clearInterval(interval);
       }
     }, 1000);
