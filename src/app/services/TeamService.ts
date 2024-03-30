@@ -47,5 +47,7 @@ export class TeamService {
   getScore(roomName1:string ,roomName: string): Observable<any> {
     return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/GetScore');
   }
-
+  getRound(roomName1:string ,roomName: string): Observable<any> {
+    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/GetRoundNumber');
+  }
 }

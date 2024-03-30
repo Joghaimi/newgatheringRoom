@@ -15,8 +15,8 @@ export class FloorIsLavaComponent {
   showLoading =false;
   teamName = "FromTheRoom"
   gameName = "Floor Is Lava Room"
-  gameUrl1 = "diving";
-  gameUrl = "divingRoom";
+  gameUrl1 = "floor";
+  gameUrl = "floorislava";
   nextGame = "dark";
   score = 0;
   gameTotalTime = 3;

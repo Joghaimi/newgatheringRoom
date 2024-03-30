@@ -8,8 +8,8 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./shooting-room.component.css']
 })
 export class ShootingRoomComponent {
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;//true;
+  showTimerandScore = true;//false;
   goToTheNextRoom = false;
   showLoading = false;
   teamName = "FromTheRoom"
@@ -21,7 +21,9 @@ export class ShootingRoomComponent {
   gameTotalTime = 540;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
-
+  roundNumber = 1;
+  requiredScore = 0;
+  roundScore = 0;
   constructor(private teamService: TeamService) {
 
   }
@@ -69,6 +71,13 @@ export class ShootingRoomComponent {
           this.score = e;
         }
       );
+      this.teamService.getRound(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          this.roundNumber = e[0] + 1;
+          this.roundScore = e[1];
+          this.mapRoundToScore(this.roundNumber);
+        }
+      );
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
         this.goToTheNextRoom = true;
@@ -76,4 +85,21 @@ export class ShootingRoomComponent {
       }
     }, 1000);
   }
+
+
+  mapRoundToScore(round: number) {
+    if (round == 1) {
+      this.requiredScore = 75
+    } else if (round == 2) {
+      this.requiredScore = 100
+    } else if (round == 3) {
+      this.requiredScore = 125
+    } else if (round == 4) {
+      this.requiredScore = 150
+    } else if (round == 5) {
+      this.requiredScore = 300
+    }
+  }
+
+
 }
