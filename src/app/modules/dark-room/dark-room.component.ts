@@ -20,7 +20,7 @@ export class DarkRoomComponent {
   nextGame = "floor";
   nextGame2 = "floorislava";
   score = 0;
-  gameTotalTime = 3;
+  gameTotalTime = 120;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
 
@@ -43,7 +43,7 @@ export class DarkRoomComponent {
   }
   GoToTheNextRoom() {
     // Restart The Game
-    this.gameTotalTime = 90;
+    this.gameTotalTime = 120;
     this.goToTheNextRoom = false;
     this.showLoading=true;
     let interval = setInterval(() => {
