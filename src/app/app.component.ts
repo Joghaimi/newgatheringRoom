@@ -11,9 +11,9 @@ export class AppComponent {
   value = "";
   isItGatheringRoom = false;
   isItFortRoom = false;
-  isItShootingRoom = false;
+  isItShootingRoom = true;
   isItDivingRoom = false;
-  isItDarkRoom = true;
+  isItDarkRoom = false;
   isItFloorIsLavaRoom = false;
 
 
