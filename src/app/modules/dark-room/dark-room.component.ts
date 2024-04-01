@@ -65,6 +65,11 @@ export class DarkRoomComponent {
   startTimer() {
     this.showTimerandScore =true
     let interval = setInterval(() => {
+      this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          this.score = e;
+        }
+      );
       this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
