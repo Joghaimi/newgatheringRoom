@@ -21,7 +21,7 @@ export class ShootingRoomComponent {
   gameTotalTime = 540;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
-  roundNumber = 1;
+  roundNumber = 0;
   requiredScore = 0;
   roundScore = 0;
   constructor(private teamService: TeamService) {
@@ -88,7 +88,10 @@ export class ShootingRoomComponent {
 
 
   mapRoundToScore(round: number) {
-    if (round == 1) {
+    if (round == 0) {
+      this.requiredScore = 5
+    }
+    else if (round == 1) {
       this.requiredScore = 75
     } else if (round == 2) {
       this.requiredScore = 100
@@ -97,7 +100,7 @@ export class ShootingRoomComponent {
     } else if (round == 4) {
       this.requiredScore = 150
     } else if (round == 5) {
-      this.requiredScore = 300
+      this.requiredScore = 180
     }
   }
 
