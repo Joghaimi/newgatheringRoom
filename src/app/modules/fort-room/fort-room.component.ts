@@ -19,7 +19,7 @@ export class FortRoomComponent {
   gameUrl = "fortRoom";
   nextGame = "shooting";
   score = 0;
-  gameTotalTime = 120;
+  gameTotalTime = 540;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
 
@@ -42,7 +42,7 @@ export class FortRoomComponent {
   }
   GoToTheNextRoom() {
     // Restart The Game
-    this.gameTotalTime = 120;
+    this.gameTotalTime = 540;
     this.goToTheNextRoom = false;
     this.showLoading=true;
     let interval = setInterval(() => {
