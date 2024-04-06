@@ -1,6 +1,38 @@
 <!-- component.html -->
 <div class="background-container">
     <div class="background-overlay"></div>
+    <!-- <div class="card position-fixed topCard"
+        style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70vw;height: 70vh;" *ngIf="showVedio">
+        <div class="card-body">
+         <video  controls (ended)="hideVideo()" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70vw;height: 70vh;" >
+                <source src="../../../assets/Video/Introduction.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+        
+        </div>
+    </div> -->
+    <div class="" *ngIf="showVedio">
+        <video controls (ended)="hideVideo()" id="video" style="width: 100vh">
+            <source src="../../../assets/Video/Introduction.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showIntro">
+
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-4"></div>
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <button class="button-container start-btn btn font-weight-bold m-auto px-5" (click)="startIntro()">
+                        Start
+                    </button>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+
+    </div>
+
     <div class="align-items-center" style="min-height: 100vh;" *ngIf="inTeamStarting">
 
         <div class="container text-white pt-5">
@@ -25,8 +57,44 @@
                 <div class="row mt-5">
                     <div class="col-4"></div>
                     <div class="col-4 button-container">
-                        <button type="button" class="col-12 btn font-weight-bold cursor-pointer" (click)="SaveTeamMembers()"
-                            *ngIf="players.length >=2"
+                        <button type="button" class="col-12 btn font-weight-bold cursor-pointer"
+                            (click)="SaveTeamMembers()" *ngIf="players.length >=2"
+                            style="color: #f0e40f;background-color: blue;font-size: 15px;z-index: 99;">Create Your
+                            Team</button>
+                    </div>
+                    <div class="col-4"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="align-items-center" style="min-height: 100vh;" *ngIf="inTeamStarting">
+
+        <div class="container text-white pt-5">
+            <div class="row text-center">
+                <h2>Please Scan Your Id</h2>
+            </div>
+            <br>
+            <br>
+            <div class="container pt-5">
+                <div class="row" *ngFor="let player of players; let i=index">
+                    <div class="col-4"></div>
+                    <div class="col-4 text-center pb-2 pt-3"
+                        [ngClass]="{'gradient-border-yellow':i %2==0 , 'gradient-border-blue':i%2 != 0}">
+                        <h3>
+                            {{i +1 + " - " + player.firstName + " " + player.lastName}}
+                        </h3>
+
+                    </div>
+                    <div class="col-4"></div>
+
+                </div>
+                <div class="row mt-5">
+                    <div class="col-4"></div>
+                    <div class="col-4 button-container">
+                        <button type="button" class="col-12 btn font-weight-bold cursor-pointer"
+                            (click)="SaveTeamMembers()" *ngIf="players.length >=2"
                             style="color: #f0e40f;background-color: blue;font-size: 15px;z-index: 99;">Create Your
                             Team</button>
                     </div>
@@ -79,7 +147,7 @@
                 </div>
                 <div class="col-6 text-center pb-2 pt-3 gradient-border-blue" style="color: white;">
                     <h3>
-                       Score : {{score}}
+                        Score : {{score}}
                     </h3>
                 </div>
             </div>

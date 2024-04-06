@@ -12,7 +12,9 @@ import Keyboard from "simple-keyboard";
 })
 export class JoinningPageComponent {
   score = 0;
-  inTeamStarting = true;
+  showIntro = true;
+  showVedio = false;
+  inTeamStarting = false;
   teamNameing = false;
   loading = false;
   time = false;
@@ -34,8 +36,8 @@ export class JoinningPageComponent {
 
   }
   ngOnInit(): void {
-    if (this.inTeamStarting) {
-      interval(1000)
+    // if (this.inTeamStarting) {
+    interval(1000)
       .pipe(
         switchMap(() => this.teamService.getTeamMembers().pipe(
           catchError(error => {
@@ -60,7 +62,7 @@ export class JoinningPageComponent {
         // Handle the response here
       });
 
-    }
+    // }
     // interval(1000)
     //   .pipe(
     //     // Stop the interval when the stopInterval$ emits a value
@@ -89,6 +91,20 @@ export class JoinningPageComponent {
     //   });
   }
 
+  startIntro() {
+    this.showVedio = true;
+    setTimeout(() => {
+      const video = document.getElementById("video") as HTMLVideoElement;;
+      video?.requestFullscreen();
+      video.play();
+    }, 20);
+  }
+  hideVideo() {
+    this.showVedio = false;
+    this.showIntro = false;
+    this.inTeamStarting = true;
+  }
+
   // Save Team Members 
   SaveTeamMembers() {
     this.inTeamStarting = false;
@@ -110,12 +126,13 @@ export class JoinningPageComponent {
             }
             this.teamService.sendScoreToNextRoom(team).subscribe(
               e => {
-                this.inTeamStarting = true;
+                this.showIntro=true;
+                // this.inTeamStarting = true;
                 this.teamNameing = false;
                 this.loading = false;
                 this.teamService.clearGatheringRoomMember().subscribe(
-                  res=>{
-                    this.teamName= "Enter Your Team Name";
+                  res => {
+                    this.teamName = "Enter Your Team Name";
                   }
                 );
                 clearInterval(interval);

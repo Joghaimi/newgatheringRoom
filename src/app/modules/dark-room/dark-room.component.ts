@@ -9,8 +9,8 @@ import { interval, Subscription } from 'rxjs';
 })
 export class DarkRoomComponent {
 
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;
+  showTimerandScore = true;
   goToTheNextRoom = false;
   showLoading =false;
   teamName = "FromTheRoom"
