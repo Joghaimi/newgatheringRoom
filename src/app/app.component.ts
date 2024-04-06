@@ -9,10 +9,10 @@ import Keyboard from "simple-keyboard";
 export class AppComponent {
   title = 'XO Game';
   value = "";
-  isItGatheringRoom = true;
+  isItGatheringRoom = false;
   isItFortRoom = false;
   isItShootingRoom = false;
-  isItDivingRoom = false;
+  isItDivingRoom = true;
   isItDarkRoom = false;
   isItFloorIsLavaRoom = false;
 
