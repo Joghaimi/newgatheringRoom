@@ -18,7 +18,7 @@ export class ShootingRoomComponent {
   gameUrl = "Shooting";
   nextGame = "diving";
   score = 0;
-  gameTotalTime = 540;
+  gameTotalTime = 360;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
   roundNumber = 0;
@@ -43,7 +43,7 @@ export class ShootingRoomComponent {
   }
   GoToTheNextRoom() {
     // Restart The Game
-    this.gameTotalTime = 540;
+    this.gameTotalTime = 360;
     this.goToTheNextRoom = false;
     this.showLoading = true;
     let interval = setInterval(() => {
