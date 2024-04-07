@@ -12,7 +12,7 @@ export class DivingRoomComponent {
   showStartGame = true;
   showTimerandScore = false;
   goToTheNextRoom = false;
-  showLoading =false;
+  showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Diving Room"
   gameUrl1 = "diving";
@@ -34,7 +34,7 @@ export class DivingRoomComponent {
         this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
-          e=>{
+          e => {
             this.startTimer();
           }
         );
@@ -45,15 +45,15 @@ export class DivingRoomComponent {
     // Restart The Game
     this.gameTotalTime = 360;
     this.goToTheNextRoom = false;
-    this.showLoading=true;
+    this.showLoading = true;
     let interval = setInterval(() => {
-      this.teamService.isOccupiedByName2(this.nextGame , this.nextGame2).subscribe(
+      this.teamService.isOccupiedByName2(this.nextGame, this.nextGame2).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName2(this.nextGame, this.nextGame2,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName2(this.nextGame, this.nextGame2, this.team).subscribe(
               e => {
-                this.showLoading=false;
-                this.showStartGame=true;
+                this.showLoading = false;
+                this.showStartGame = true;
                 clearInterval(interval);
               }
             );
@@ -62,15 +62,22 @@ export class DivingRoomComponent {
       );
     }, 3000);
   }
+
+
+
   startTimer() {
     this.showTimerandScore =true
     let interval = setInterval(() => {
+      this.gameTotalTime--;
+      // Get Score
+
       this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
         e=>{
           this.score=e;
         }
       );
-      this.gameTotalTime--;
+
+
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
         this.goToTheNextRoom =true;
@@ -78,4 +85,22 @@ export class DivingRoomComponent {
       }
     }, 1000);
   }
+
+
+  // startTimer() {
+  //   this.showTimerandScore = true
+  //   let interval = setInterval(() => {
+  //     this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+  //       e => {
+  //         this.score = e;
+  //       }
+  //     );
+  //     this.gameTotalTime--;
+  //     if (this.gameTotalTime == 0) {
+  //       this.showTimerandScore = false;
+  //       this.goToTheNextRoom = true;
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+  // }
 }
