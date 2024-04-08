@@ -8,11 +8,11 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./fort-room.component.css']
 })
 export class FortRoomComponent {
-  
+
   showStartGame = false;
   showTimerandScore = true;
   goToTheNextRoom = false;
-  showLoading =false;
+  showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Fort Room"
   gameUrl1 = "fort";
@@ -28,15 +28,25 @@ export class FortRoomComponent {
   }
   startTheGameV2() {
     // Get Team Info
+    let isGameStarted = false;
     this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
       e => {
         this.team = e;
         this.showStartGame = false;
-        this.teamService.isOccupied().subscribe(
-          e=>{
+
+        let interval = setInterval(() => {
+          // Get Score
+          this.teamService.isGameStarted().subscribe(
+            e => {
+              if (e)
+                isGameStarted = true;
+            }
+          );
+          if (isGameStarted) {
             this.startTimer();
+            clearInterval(interval);
           }
-        );
+        }, 1000);
       }
     );
   }
@@ -49,7 +59,7 @@ export class FortRoomComponent {
         this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
-          e=>{
+          e => {
             this.startTimer();
           }
         );
@@ -60,15 +70,15 @@ export class FortRoomComponent {
     // Restart The Game
     this.gameTotalTime = 360;
     this.goToTheNextRoom = false;
-    this.showLoading=true;
+    this.showLoading = true;
     let interval = setInterval(() => {
       this.teamService.isOccupiedByName(this.nextGame).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName(this.nextGame, this.team).subscribe(
               e => {
-                this.showLoading=false;
-                this.showStartGame=true;
+                this.showLoading = false;
+                this.showStartGame = true;
                 clearInterval(interval);
               }
             );
@@ -78,21 +88,21 @@ export class FortRoomComponent {
     }, 3000);
   }
   startTimer() {
-    this.showTimerandScore =true
+    this.showTimerandScore = true
     let interval = setInterval(() => {
       this.gameTotalTime--;
       // Get Score
 
       this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
-        e=>{
-          this.score=e;
+        e => {
+          this.score = e;
         }
       );
 
 
       if (this.gameTotalTime == 0) {
         this.showTimerandScore = false;
-        this.goToTheNextRoom =true;
+        this.goToTheNextRoom = true;
         clearInterval(interval);
       }
     }, 1000);

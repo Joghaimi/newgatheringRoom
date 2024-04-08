@@ -29,25 +29,29 @@ export class TeamService {
   isOccupiedByName(roomName: string) {
     return this.httpClient.get('https://' + roomName + '.local:7248/api/' + roomName + '/IsOccupied');
   }
-  isOccupiedByName2(roomName: string ,roomName2: string) {
+  isOccupiedByName2(roomName: string, roomName2: string) {
     return this.httpClient.get('https://' + roomName + '.local:7248/api/' + roomName2 + '/IsOccupied');
   }
   sendScoreToNextRoomByName(roomName: string, team: Team) {
     return this.httpClient.post('https://' + roomName + '.local:7248/api/' + roomName + '/ReceiveScore', team);
   }
-  sendScoreToNextRoomByName2(roomName: string,roomName2: string, team: Team) {
+  sendScoreToNextRoomByName2(roomName: string, roomName2: string, team: Team) {
     return this.httpClient.post('https://' + roomName + '.local:7248/api/' + roomName2 + '/ReceiveScore', team);
   }
-  startTheGame(roomName1:string ,roomName: string) {
+  startTheGame(roomName1: string, roomName: string) {
     return this.httpClient.post('https://' + roomName1 + '.local:7248/api/' + roomName + '/StartStopGame?startGame=true', true);
   }
-  getTeamMembersAndScore(roomName1:string ,roomName: string): Observable<any> {
+  getTeamMembersAndScore(roomName1: string, roomName: string): Observable<any> {
     return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/ReturnScore');
   }
-  getScore(roomName1:string ,roomName: string): Observable<any> {
+  getScore(roomName1: string, roomName: string): Observable<any> {
     return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/GetScore');
   }
-  getRound(roomName1:string ,roomName: string): Observable<any> {
+  isGameStarted() {
+    return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsGameStarted');
+  }
+
+  getRound(roomName1: string, roomName: string): Observable<any> {
     return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/GetRoundNumber');
   }
 }
