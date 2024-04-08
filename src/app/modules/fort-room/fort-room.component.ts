@@ -9,8 +9,8 @@ import { interval, Subscription } from 'rxjs';
 })
 export class FortRoomComponent {
   
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;
+  showTimerandScore = true;
   goToTheNextRoom = false;
   showLoading =false;
   teamName = "FromTheRoom"
@@ -24,8 +24,24 @@ export class FortRoomComponent {
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
-
+    this.startTheGameV2();
   }
+  startTheGameV2() {
+    // Get Team Info
+    this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+      e => {
+        this.team = e;
+        this.showStartGame = false;
+        this.teamService.isOccupied().subscribe(
+          e=>{
+            this.startTimer();
+          }
+        );
+      }
+    );
+  }
+
+
   startTheGame() {
     // Get Team Info
     this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
