@@ -51,6 +51,13 @@ export class TeamService {
     return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsGameStarted');
   }
 
+  GameStatus() {
+    // return this.httpClient.get('https://fort.local:7248/api/FortRoom/RoomStatus');
+    return this.httpClient.get('https://fort.local:7248/api/FortRoom/RoomStatus', { responseType: 'text' });
+
+  }
+
+
   getRound(roomName1: string, roomName: string): Observable<any> {
     return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/GetRoundNumber');
   }

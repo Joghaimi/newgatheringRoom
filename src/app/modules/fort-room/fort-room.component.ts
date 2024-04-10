@@ -28,27 +28,64 @@ export class FortRoomComponent {
   }
   startTheGameV2() {
     // Get Team Info
-    let isGameStarted = false;
-    this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-      e => {
-        this.team = e;
-        this.showStartGame = false;
+    let isTimerStarted = false;
+    var gameStatus = "Empty";
 
-        let interval = setInterval(() => {
-          // Get Score
-          this.teamService.isGameStarted().subscribe(
-            e => {
-              if (e)
-                isGameStarted = true;
-            }
-          );
-          if (isGameStarted) {
+    setInterval(() => {
+
+
+      this.teamService.GameStatus().subscribe(
+        e => {
+          gameStatus = e.toString();
+          console.log(e)
+          if (gameStatus == "NotStarted") {
+            // Restart The Timer and the Game also get the Team Members
+            this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+              e=>{
+                this.team = e;
+                isTimerStarted =false;
+              }
+            );
+            // this.startTimer();
+          }else if(gameStatus == "Started" &&!isTimerStarted){
             this.startTimer();
-            clearInterval(interval);
+            isTimerStarted =true;
           }
-        }, 1000);
-      }
-    );
+
+        }
+      );
+
+
+
+
+
+      console.log('ahmad');
+    }, 3000);
+
+
+
+
+
+    // this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+    //   e => {
+    //     this.team = e;
+    //     this.showStartGame = false;
+
+    //     let interval = setInterval(() => {
+    //       // Get Score
+    //       this.teamService.isGameStarted().subscribe(
+    //         e => {
+    //           if (e)
+    //             isGameStarted = true;
+    //         }
+    //       );
+    //       if (isGameStarted) {
+    //         this.startTimer();
+    //         clearInterval(interval);
+    //       }
+    //     }, 1000);
+    //   }
+    // );
   }
 
 
