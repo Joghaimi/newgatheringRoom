@@ -51,9 +51,9 @@ export class TeamService {
     return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsGameStarted');
   }
 
-  GameStatus() {
+  GameStatus(roomName1: string, roomName: string) {
     // return this.httpClient.get('https://fort.local:7248/api/FortRoom/RoomStatus');
-    return this.httpClient.get('https://fort.local:7248/api/FortRoom/RoomStatus', { responseType: 'text' });
+    return this.httpClient.get('https://'+roomName1+'.local:7248/api/'+roomName+'/RoomStatus', { responseType: 'text' });
 
   }
 

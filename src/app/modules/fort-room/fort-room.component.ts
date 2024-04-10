@@ -32,9 +32,8 @@ export class FortRoomComponent {
     var gameStatus = "Empty";
 
     setInterval(() => {
-
-
-      this.teamService.GameStatus().subscribe(
+      // this.gameUrl1, this.gameUrl
+      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
           gameStatus = e.toString();
           console.log(e)
@@ -51,7 +50,6 @@ export class FortRoomComponent {
             this.startTimer();
             isTimerStarted =true;
           }
-
         }
       );
 
@@ -138,8 +136,8 @@ export class FortRoomComponent {
 
 
       if (this.gameTotalTime == 0) {
-        this.showTimerandScore = false;
-        this.goToTheNextRoom = true;
+        // this.showTimerandScore = false;
+        // this.goToTheNextRoom = true;
         clearInterval(interval);
       }
     }, 1000);
