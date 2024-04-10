@@ -25,7 +25,7 @@ export class ShootingRoomComponent {
   requiredScore = 0;
   roundScore = 0;
   constructor(private teamService: TeamService) {
-
+    this.startTheGameV2();
   }
 
   startTheGameV2() {
@@ -42,15 +42,15 @@ export class ShootingRoomComponent {
           if (gameStatus == "NotStarted") {
             // Restart The Timer and the Game also get the Team Members
             this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-              e=>{
+              e => {
                 this.team = e;
-                isTimerStarted =false;
+                isTimerStarted = false;
               }
             );
             // this.startTimer();
-          }else if(gameStatus == "Started" &&!isTimerStarted){
+          } else if (gameStatus == "Started" && !isTimerStarted) {
             this.startTimer();
-            isTimerStarted =true;
+            isTimerStarted = true;
           }
         }
       );
