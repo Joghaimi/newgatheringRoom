@@ -112,8 +112,8 @@ export class ShootingRoomComponent {
         }
       );
       if (this.gameTotalTime == 0) {
-        this.showTimerandScore = false;
-        this.goToTheNextRoom = true;
+        // this.showTimerandScore = false;
+        // this.goToTheNextRoom = true;
         clearInterval(interval);
       }
     }, 1000);
@@ -125,15 +125,15 @@ export class ShootingRoomComponent {
       this.requiredScore = 5
     }
     else if (round == 1) {
-      this.requiredScore = 75
+      this.requiredScore = 50
     } else if (round == 2) {
-      this.requiredScore = 100
+      this.requiredScore = 75
     } else if (round == 3) {
-      this.requiredScore = 125
+      this.requiredScore = 100
     } else if (round == 4) {
-      this.requiredScore = 150
+      this.requiredScore = 125
     } else if (round == 5) {
-      this.requiredScore = 180
+      this.requiredScore = 150
     }
   }
 
