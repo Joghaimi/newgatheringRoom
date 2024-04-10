@@ -9,8 +9,8 @@ import { interval, Subscription } from 'rxjs';
 })
 export class DivingRoomComponent {
 
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;
+  showTimerandScore = true;
   goToTheNextRoom = false;
   showLoading = false;
   teamName = "FromTheRoom"
@@ -25,8 +25,38 @@ export class DivingRoomComponent {
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
-
+    this.startTheGameV2();
   }
+  startTheGameV2() {
+    // Get Team Info
+    let isTimerStarted = false;
+    var gameStatus = "Empty";
+
+    setInterval(() => {
+      // this.gameUrl1, this.gameUrl
+      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          gameStatus = e.toString();
+          console.log(e)
+          if (gameStatus == "NotStarted") {
+            // Restart The Timer and the Game also get the Team Members
+            this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+              e => {
+                this.team = e;
+                isTimerStarted = false;
+              }
+            );
+            // this.startTimer();
+          } else if (gameStatus == "Started" && !isTimerStarted) {
+            this.startTimer();
+            isTimerStarted = true;
+          }
+        }
+      );
+      console.log('ahmad');
+    }, 3000);
+  }
+
   startTheGame() {
     // Get Team Info
     this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
@@ -66,21 +96,21 @@ export class DivingRoomComponent {
 
 
   startTimer() {
-    this.showTimerandScore =true
+    this.showTimerandScore = true
     let interval = setInterval(() => {
       this.gameTotalTime--;
       // Get Score
 
       this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
-        e=>{
-          this.score=e;
+        e => {
+          this.score = e;
         }
       );
 
 
       if (this.gameTotalTime == 0) {
-        this.showTimerandScore = false;
-        this.goToTheNextRoom =true;
+        // this.showTimerandScore = false;
+        // this.goToTheNextRoom = true;
         clearInterval(interval);
       }
     }, 1000);
