@@ -8,8 +8,8 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./shooting-room.component.css']
 })
 export class ShootingRoomComponent {
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;
+  showTimerandScore = true;
   goToTheNextRoom = false;
   showLoading = false;
   teamName = "FromTheRoom"
