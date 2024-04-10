@@ -102,8 +102,8 @@ export class DarkRoomComponent {
       );
       this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
-        this.showTimerandScore = false;
-        this.goToTheNextRoom =true;
+        // this.showTimerandScore = false;
+        // this.goToTheNextRoom =true;
         clearInterval(interval);
       }
     }, 1000);
