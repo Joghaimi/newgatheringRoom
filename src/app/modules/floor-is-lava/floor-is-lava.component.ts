@@ -9,8 +9,8 @@ import { interval, Subscription } from 'rxjs';
 })
 export class FloorIsLavaComponent {
 
-  showStartGame = true;
-  showTimerandScore = false;
+  showStartGame = false;
+  showTimerandScore = true;
   goToTheNextRoom = false;
   showLoading =false;
   teamName = "FromTheRoom"
@@ -24,7 +24,36 @@ export class FloorIsLavaComponent {
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
+    this.startTheGameV2();
+  }
+  startTheGameV2() {
+    // Get Team Info
+    let isTimerStarted = false;
+    var gameStatus = "Empty";
 
+    setInterval(() => {
+      // this.gameUrl1, this.gameUrl
+      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          gameStatus = e.toString();
+          console.log(e)
+          if (gameStatus == "NotStarted") {
+            // Restart The Timer and the Game also get the Team Members
+            this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+              e => {
+                this.team = e;
+                isTimerStarted = false;
+              }
+            );
+            // this.startTimer();
+          } else if (gameStatus == "Started" && !isTimerStarted) {
+            this.startTimer();
+            isTimerStarted = true;
+          }
+        }
+      );
+      console.log('ahmad');
+    }, 3000);
   }
   startTheGame() {
     // Get Team Info
@@ -51,8 +80,8 @@ export class FloorIsLavaComponent {
           if (!response) {
             this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
               e => {
-                this.showLoading=false;
-                this.showStartGame=true;
+                // this.showLoading=false;
+                // this.showStartGame=true;
                 clearInterval(interval);
               }
             );
