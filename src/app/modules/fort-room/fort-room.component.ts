@@ -51,9 +51,9 @@ export class FortRoomComponent {
       }
 
       if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
-        // this.startTimer();
+        this.startTimer();
         isTimerStarted = true;
-        console.log("Time Started");
+        // console.log("Time Started");
       }
 
 
