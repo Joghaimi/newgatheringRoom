@@ -31,7 +31,7 @@ export class DivingRoomComponent {
   game() {
     var gameStatus = "Empty";
     let isTimerStarted = false;
-
+    let timerIsSet = false;
     setInterval(() => {
       this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
@@ -39,22 +39,33 @@ export class DivingRoomComponent {
           isTimerStarted = false;
         }
       );
-    });
-    // =====> Timer 
-    if (gameStatus != "NotStarted") {
-      // Get Timer 
-      this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
-        time => {
-          this.gameTotalTime = time;
-        }
-      );
-    }
-    if (gameStatus != "Started" && !isTimerStarted) {
-      this.startTimer();
-      isTimerStarted = true;
-    }
+      // =====> Timer 
+      let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
+      if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
+        // Get Timer 
+        this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
+          time => {
+            this.gameTotalTime = time;
+            timerIsSet = true;
+          }
+        );
+      }
+
+      if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
+        this.startTimer();
+        isTimerStarted = true;
+        // console.log("Time Started");
+      }
+
+
+
+    }, 1000);
+
+
 
   }
+
+
   startTheGameV2() {
     // Get Team Info
     let isTimerStarted = false;
