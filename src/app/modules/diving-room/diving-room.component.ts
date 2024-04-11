@@ -69,9 +69,6 @@ export class DivingRoomComponent {
 
 
     }, 1000);
-
-
-
   }
 
 

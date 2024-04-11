@@ -35,7 +35,6 @@ export class FortRoomComponent {
       this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
           gameStatus = e;
-          isTimerStarted = false;
         }
       );
       // =====> Timer 
@@ -48,23 +47,28 @@ export class FortRoomComponent {
             timerIsSet = true;
           }
         );
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
       }
 
       if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
         this.startTimer();
         isTimerStarted = true;
-        // console.log("Time Started");
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
+        console.log("Time Started");
       }
 
 
 
     }, 1000);
-
-
-
   }
-
-
 
   startTheGameV2() {
     // Get Team Info

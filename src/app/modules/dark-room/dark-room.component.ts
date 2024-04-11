@@ -31,29 +31,44 @@ export class DarkRoomComponent {
   game() {
     var gameStatus = "Empty";
     let isTimerStarted = false;
-
+    let timerIsSet = false;
     setInterval(() => {
       this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
           gameStatus = e;
-          isTimerStarted = false;
         }
       );
-    });
-    // =====> Timer 
-    if (gameStatus != "NotStarted") {
-      // Get Timer 
-      this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
-        time => {
-          this.gameTotalTime = time;
-        }
-      );
-    }
-    if (gameStatus != "Started" && !isTimerStarted) {
-      this.startTimer();
-      isTimerStarted = true;
-    }
+      // =====> Timer 
+      let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
+      if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
+        // Get Timer 
+        this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
+          time => {
+            this.gameTotalTime = time;
+            timerIsSet = true;
+          }
+        );
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
+      }
 
+      if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
+        this.startTimer();
+        isTimerStarted = true;
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
+        console.log("Time Started");
+      }
+
+
+
+    }, 1000);
   }
   startTheGameV2() {
     // Get Team Info
