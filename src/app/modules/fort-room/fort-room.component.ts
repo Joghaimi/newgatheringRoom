@@ -39,8 +39,8 @@ export class FortRoomComponent {
         }
       );
       // =====> Timer 
-      let tmerNotSetAndGameStarted = (!timerIsSet&& gameStatus != "Started");
-      if (gameStatus != "NotStarted"  || tmerNotSetAndGameStarted) {
+      let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
+      if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
         // Get Timer 
         this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
           time => {
@@ -50,7 +50,7 @@ export class FortRoomComponent {
         );
       }
 
-      if (gameStatus != "Started" && !isTimerStarted && timerIsSet) {
+      if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
         // this.startTimer();
         isTimerStarted = true;
         console.log("Time Started");
