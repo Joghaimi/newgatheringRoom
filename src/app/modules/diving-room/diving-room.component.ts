@@ -36,7 +36,6 @@ export class DivingRoomComponent {
       this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
           gameStatus = e;
-          isTimerStarted = false;
         }
       );
       // =====> Timer 
