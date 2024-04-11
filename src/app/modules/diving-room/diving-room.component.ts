@@ -21,7 +21,7 @@ export class DivingRoomComponent {
   nextGame2 = "darkRoom";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "Team Name" };
+  team: Team = { name: "--" };
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
