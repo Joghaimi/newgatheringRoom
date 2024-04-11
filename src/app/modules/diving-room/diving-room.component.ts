@@ -48,11 +48,21 @@ export class DivingRoomComponent {
             timerIsSet = true;
           }
         );
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
       }
 
       if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
-        // this.startTimer();
+        this.startTimer();
         isTimerStarted = true;
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
         console.log("Time Started");
       }
 
