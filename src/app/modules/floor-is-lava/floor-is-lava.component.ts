@@ -12,7 +12,7 @@ export class FloorIsLavaComponent {
   showStartGame = false;
   showTimerandScore = true;
   goToTheNextRoom = false;
-  showLoading =false;
+  showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Floor Is Lava Room"
   gameUrl1 = "floor";
@@ -24,7 +24,35 @@ export class FloorIsLavaComponent {
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
-    this.startTheGameV2();
+    this.game();
+  }
+
+  game() {
+    var gameStatus = "Empty";
+    let isTimerStarted = false;
+
+    setInterval(() => {
+      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          gameStatus = e;
+          isTimerStarted = false;
+        }
+      );
+    });
+    // =====> Timer 
+    if (gameStatus != "NotStarted") {
+      // Get Timer 
+      this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
+        time => {
+          this.gameTotalTime = time;
+        }
+      );
+    }
+    if (gameStatus != "Started" && !isTimerStarted) {
+      this.startTimer();
+      isTimerStarted = true;
+    }
+
   }
   startTheGameV2() {
     // Get Team Info
@@ -62,7 +90,7 @@ export class FloorIsLavaComponent {
         this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
-          e=>{
+          e => {
             this.startTimer();
           }
         );
@@ -73,12 +101,12 @@ export class FloorIsLavaComponent {
     // Restart The Game
     this.gameTotalTime = 360;
     this.goToTheNextRoom = false;
-    this.showLoading=true;
+    this.showLoading = true;
     let interval = setInterval(() => {
       this.teamService.isOccupiedByName(this.nextGame).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName(this.nextGame,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName(this.nextGame, this.team).subscribe(
               e => {
                 // this.showLoading=false;
                 // this.showStartGame=true;
@@ -91,9 +119,10 @@ export class FloorIsLavaComponent {
     }, 3000);
   }
   startTimer() {
-    this.showTimerandScore =true
+    this.showTimerandScore = true
     let interval = setInterval(() => {
-      this.gameTotalTime--;
+      if (this.gameTotalTime > 0)
+        this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
         // this.showTimerandScore = false;
         // this.goToTheNextRoom =true;

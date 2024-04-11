@@ -52,9 +52,11 @@ export class TeamService {
   }
 
   GameStatus(roomName1: string, roomName: string) {
-    // return this.httpClient.get('https://fort.local:7248/api/FortRoom/RoomStatus');
-    return this.httpClient.get('https://'+roomName1+'.local:7248/api/'+roomName+'/RoomStatus', { responseType: 'text' });
+    return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/RoomStatus', { responseType: 'text' });
 
+  }
+  RoomTime(roomName1: string, roomName: string) {
+    return this.httpClient.get<number>('https://' + roomName1 + '.local:7248/api/' + roomName + '/CurrentTime');
   }
 
 

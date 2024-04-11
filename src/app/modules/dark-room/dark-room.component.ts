@@ -12,7 +12,7 @@ export class DarkRoomComponent {
   showStartGame = false;
   showTimerandScore = true;
   goToTheNextRoom = false;
-  showLoading =false;
+  showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Dark Room"
   gameUrl1 = "dark";
@@ -25,7 +25,35 @@ export class DarkRoomComponent {
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
-    this.startTheGameV2();
+    this.game();
+  }
+
+  game() {
+    var gameStatus = "Empty";
+    let isTimerStarted = false;
+
+    setInterval(() => {
+      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          gameStatus = e;
+          isTimerStarted = false;
+        }
+      );
+    });
+    // =====> Timer 
+    if (gameStatus != "NotStarted") {
+      // Get Timer 
+      this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
+        time => {
+          this.gameTotalTime = time;
+        }
+      );
+    }
+    if (gameStatus != "Started" && !isTimerStarted) {
+      this.startTimer();
+      isTimerStarted = true;
+    }
+
   }
   startTheGameV2() {
     // Get Team Info
@@ -64,7 +92,7 @@ export class DarkRoomComponent {
         this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
-          e=>{
+          e => {
             this.startTimer();
           }
         );
@@ -75,12 +103,12 @@ export class DarkRoomComponent {
     // Restart The Game
     this.gameTotalTime = 360;
     this.goToTheNextRoom = false;
-    this.showLoading=true;
+    this.showLoading = true;
     let interval = setInterval(() => {
-      this.teamService.isOccupiedByName2(this.nextGame,this.nextGame2).subscribe(
+      this.teamService.isOccupiedByName2(this.nextGame, this.nextGame2).subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName2(this.nextGame,this.nextGame2,this.team).subscribe(
+            this.teamService.sendScoreToNextRoomByName2(this.nextGame, this.nextGame2, this.team).subscribe(
               e => {
                 // this.showLoading=false;
                 // this.showStartGame=true;
@@ -93,14 +121,15 @@ export class DarkRoomComponent {
     }, 3000);
   }
   startTimer() {
-    this.showTimerandScore =true
+    this.showTimerandScore = true
     let interval = setInterval(() => {
       this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
         e => {
           this.score = e;
         }
       );
-      this.gameTotalTime--;
+      if (this.gameTotalTime > 0)
+        this.gameTotalTime--;
       if (this.gameTotalTime == 0) {
         // this.showTimerandScore = false;
         // this.goToTheNextRoom =true;
