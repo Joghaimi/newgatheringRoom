@@ -18,7 +18,7 @@ export class FloorIsLavaComponent {
   gameUrl1 = "floor";
   gameUrl = "floorislava";
   nextGame = "dark";
-  score = 0;
+  score :number|any= 0;
   gameTotalTime = 360;
   team: Team = { name: "Team Name" };
   countdownSubscription!: Subscription;
@@ -50,6 +50,7 @@ export class FloorIsLavaComponent {
         this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
           e => {
             this.team = e;
+            this.score =this.team.floorIsLavaRoomScore; 
           }
         );
       }
