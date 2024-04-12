@@ -138,6 +138,11 @@ export class FloorIsLavaComponent {
     let interval = setInterval(() => {
       if (this.gameTotalTime > 0)
         this.gameTotalTime--;
+      this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+        e => {
+          this.score = e;
+        }
+      );
       if (this.gameTotalTime == 0) {
         // this.showTimerandScore = false;
         // this.goToTheNextRoom =true;
