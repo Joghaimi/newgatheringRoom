@@ -50,7 +50,7 @@ export class FloorIsLavaComponent {
         this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
           e => {
             this.team = e;
-            this.score =this.team.floorIsLavaRoomScore; 
+            // this.score =this.team.floorIsLavaRoomScore; 
           }
         );
       }
