@@ -169,13 +169,13 @@ export class ShootingRoomComponent {
       this.requiredScore = 5
     }
     else if (round == 1) {
-      this.requiredScore = 50
-    } else if (round == 2) {
-      this.requiredScore = 75
-    } else if (round == 3) {
       this.requiredScore = 100
+    } else if (round == 2) {
+      this.requiredScore = 80
+    } else if (round == 3) {
+      this.requiredScore = 60
     } else if (round == 4) {
-      this.requiredScore = 125
+      this.requiredScore = 40
     } else if (round == 5) {
       this.requiredScore = 150
     }

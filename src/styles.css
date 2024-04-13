@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
 @import 'simple-keyboard/build/css/index.css';
+@import url('https://fonts.cdnfonts.com/css/alarm-clock');
+@import url('https://fonts.cdnfonts.com/css/notably-absent');
+
 
 body {
     background-color: #f4f6f8;

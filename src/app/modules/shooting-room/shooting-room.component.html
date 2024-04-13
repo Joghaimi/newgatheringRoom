@@ -1,7 +1,43 @@
 <div class="background-container">
     <div class="background-overlay"></div>
+    <div class="text-white button-container">
+        <div class="row pt-3 fw-bold absent-font" style="font-size: 42px;">
+            <div class="col-6" style="padding-left: 7.3%;">{{team.name =="" ? "----" :team.name}}</div>
+            <div class="col-6 text-end" style="padding-right: 7.5%;">{{gameName}}</div>
+        </div>
+        <div class="row align-items-center" style="min-height:70vh">
+            <div class="col-12 text-center px-5">
+                <div class="row">
+                    <h1 class="fw-bolder" style="font-family: 'alarm clock', sans-serif;font-size: 90px;">
+                        {{ gameTotalTime | timeFormat }}
+                    </h1>
+                </div>
+                <div class="row">
+                    <h1 class="fw-bolder" style="font-family: 'alarm clock', sans-serif;font-size: 90px;">
+                        {{score}}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row fw-bold" style="font-size: 42px;">
+            <div class="col-6 absent-font" style="padding-left: 7.3%;">
+                {{roundNumber >0 ?"Round " +roundNumber :"Big Target"}}
+            </div>
+            <div class="col-6 text-end" style="padding-right: 7.5%;" *ngIf="roundNumber!=5">
+                {{roundScore}} / {{ requiredScore }}
+            </div>
+            <div class="col-6 text-end" style="padding-right: 7.5%;" *ngIf="roundNumber==5">
+                {{roundScore}}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="background-container" *ngIf="false">
+    <div class="background-overlay"></div>
     <!-- Start The Game -->
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showStartGame">
+    <!-- <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showStartGame">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-4"></div>
@@ -14,10 +50,10 @@
                 <div class="col-4"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Team Name and Info -->
-    <div class="align-items-center" style="min-height: 100vh;" *ngIf="showTimerandScore">
+    <div class="align-items-center" style="min-height: 100vh;" *ngIf="false">
 
         <div class="container text-white pt-5">
             <div class="row text-center">
@@ -45,7 +81,7 @@
                 <div class="col ps-5">
                     <span class="" style="float: inline-start;">
                         <h1 class="gradient-border-blue text-center px-5">
-                            {{roundNumber >0 ?"Round " +roundNumber :"Big Target"}} 
+                            {{roundNumber >0 ?"Round " +roundNumber :"Big Target"}}
                         </h1>
                         <h1 class="text-center">
                             {{ requiredScore }} - {{roundScore}}

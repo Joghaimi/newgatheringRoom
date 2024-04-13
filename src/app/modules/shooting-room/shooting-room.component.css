@@ -147,3 +147,6 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  .absent-font{
+    font-family: 'Notably Absent', sans-serif;
+  }
