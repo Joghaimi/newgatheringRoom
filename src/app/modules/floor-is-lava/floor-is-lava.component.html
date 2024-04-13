@@ -19,10 +19,8 @@
                 </div>
                 <div class="row">
                     <h1 class="fw-bolder" style="font-family: 'alarm clock', sans-serif;font-size: 90px;"
-                        *ngIf="gameStatus == 'FinishedNotEmpty' ||gameStatus == 'Leaving'"
-                    >
-                        Total: {{team.fortRoomScore +team.shootingRoomScore +team.divingRoomScore +team.darkRoomScore
-                        +team.floorIsLavaRoomScore }}
+                        *ngIf="gameStatus == 'FinishedNotEmpty' ||gameStatus == 'Leaving'">
+                        Total:{{totalScore}}
                     </h1>
                 </div>
             </div>
