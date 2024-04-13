@@ -18,7 +18,9 @@ export class RoomSenarioComponent {
   gameUrl = "fortRoom";
   score = 0;
   gameTotalTime = 3;
-  team: Team = { name: "Team Name" };
+  // team: Team = { name: "Team Name" };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
+
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
@@ -28,7 +30,7 @@ export class RoomSenarioComponent {
     // Get Team Info
     this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
       e => {
-        this.team = e;
+        // this.team = e;
         this.showStartGame = false;
         this.teamService.startTheGame(this.gameUrl1, this.gameUrl).subscribe(
           e=>{
@@ -47,13 +49,13 @@ export class RoomSenarioComponent {
       this.teamService.isOccupiedByName("shooting").subscribe(
         response => {
           if (!response) {
-            this.teamService.sendScoreToNextRoomByName("shooting",this.team).subscribe(
-              e => {
-                this.showLoading=false;
-                this.showStartGame=true;
-                clearInterval(interval);
-              }
-            );
+            // this.teamService.sendScoreToNextRoomByName("shooting",this.team).subscribe(
+            //   e => {
+            //     this.showLoading=false;
+            //     this.showStartGame=true;
+            //     clearInterval(interval);
+            //   }
+            // );
           }
         }
       );

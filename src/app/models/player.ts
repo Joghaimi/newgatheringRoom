@@ -8,9 +8,9 @@ export interface Player {
 export interface Team {
     name: string,
     player?: Player[],
-    fortRoomScore?: number,
-    shootingRoomScore?: number,
-    divingRoomScore?: number,
-    darkRoomScore?: number,
-    floorIsLavaRoomScore?: number,
+    fortRoomScore: number,
+    shootingRoomScore: number,
+    divingRoomScore: number,
+    darkRoomScore: number,
+    floorIsLavaRoomScore: number,
 }

@@ -20,7 +20,7 @@ export class FortRoomComponent {
   nextGame = "shooting";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----" };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {

@@ -20,26 +20,26 @@ export class FloorIsLavaComponent {
   nextGame = "dark";
   score :number|any= 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----" };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
   countdownSubscription!: Subscription;
-
+  gameStatus = "Empty";
   constructor(private teamService: TeamService) {
     this.game();
   }
 
   game() {
-    var gameStatus = "Empty";
+ 
     let isTimerStarted = false;
     let timerIsSet = false;
     setInterval(() => {
       this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
         e => {
-          gameStatus = e;
+          this.gameStatus = e;
         }
       );
       // =====> Timer 
-      let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
-      if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
+      let tmerNotSetAndGameStarted = (!timerIsSet && this.gameStatus != "Started");
+      if (this.gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
         // Get Timer 
         this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
           time => {
@@ -54,7 +54,7 @@ export class FloorIsLavaComponent {
         );
       }
 
-      if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
+      if (this.gameStatus == "Started" && !isTimerStarted && timerIsSet) {
         this.startTimer();
         isTimerStarted = true;
         this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(

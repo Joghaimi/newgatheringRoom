@@ -123,10 +123,16 @@ export class JoinningPageComponent {
             let team: Team = {
               name: this.teamName,
               player: this.players,
+              darkRoomScore: 0,
+              divingRoomScore: 0,
+              floorIsLavaRoomScore: 0,
+              fortRoomScore: 0,
+              shootingRoomScore: 0
             }
+
             this.teamService.sendScoreToNextRoom(team).subscribe(
               e => {
-                this.showIntro=true;
+                this.showIntro = true;
                 // this.inTeamStarting = true;
                 this.teamNameing = false;
                 this.loading = false;

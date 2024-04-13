@@ -14,14 +14,14 @@ export class DarkRoomComponent {
   goToTheNextRoom = false;
   showLoading = false;
   teamName = "FromTheRoom"
-  gameName = "Dark Room"
+  gameName = "Plus Minus Room"
   gameUrl1 = "dark";
   gameUrl = "darkRoom";
   nextGame = "floor";
   nextGame2 = "floorislava";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----" };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
   countdownSubscription!: Subscription;
 
   constructor(private teamService: TeamService) {
