@@ -31,6 +31,7 @@
     position: relative;
     /* Set a higher z-index than the background overlay */
     z-index: 99;
+    
 }
 
 .topCard {
@@ -120,6 +121,7 @@
     border-radius: 7px;
     box-shadow: 0 .2em gray;
     cursor: pointer;
+    font-size: 25px;
 
 }
 
