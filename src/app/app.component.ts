@@ -10,8 +10,8 @@ export class AppComponent {
   title = 'XO Game';
   value = "";
   isItGatheringRoom = false;
-  isItFortRoom = true;
-  isItShootingRoom = false;
+  isItFortRoom = false;
+  isItShootingRoom = true;
   isItDivingRoom = false;
   isItDarkRoom = false;
   isItFloorIsLavaRoom = false;
