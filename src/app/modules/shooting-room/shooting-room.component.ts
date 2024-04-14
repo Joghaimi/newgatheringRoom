@@ -65,41 +65,45 @@ export class ShootingRoomComponent {
         );
         console.log("Time Started");
       }
+      if (gameStatus == "Empty"){
+        isTimerStarted =false;
+        timerIsSet =false;
+      }
 
 
 
     }, 1000);
   }
 
-  startTheGameV2() {
-    // Get Team Info
-    let isTimerStarted = false;
-    var gameStatus = "Empty";
+  // startTheGameV2() {
+  //   // Get Team Info
+  //   let isTimerStarted = false;
+  //   var gameStatus = "Empty";
 
-    setInterval(() => {
-      // this.gameUrl1, this.gameUrl
-      this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
-        e => {
-          gameStatus = e.toString();
-          console.log(e)
-          if (gameStatus == "NotStarted") {
-            // Restart The Timer and the Game also get the Team Members
-            this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-              e => {
-                this.team = e;
-                isTimerStarted = false;
-              }
-            );
-            // this.startTimer();
-          } else if (gameStatus == "Started" && !isTimerStarted) {
-            this.startTimer();
-            isTimerStarted = true;
-          }
-        }
-      );
-      console.log('ahmad');
-    }, 3000);
-  }
+  //   setInterval(() => {
+  //     // this.gameUrl1, this.gameUrl
+  //     this.teamService.GameStatus(this.gameUrl1, this.gameUrl).subscribe(
+  //       e => {
+  //         gameStatus = e.toString();
+  //         console.log(e)
+  //         if (gameStatus == "NotStarted") {
+  //           // Restart The Timer and the Game also get the Team Members
+  //           this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+  //             e => {
+  //               this.team = e;
+  //               isTimerStarted = false;
+  //             }
+  //           );
+  //           // this.startTimer();
+  //         } else if (gameStatus == "Started" && !isTimerStarted) {
+  //           this.startTimer();
+  //           isTimerStarted = true;
+  //         }
+  //       }
+  //     );
+  //     console.log('ahmad');
+  //   }, 3000);
+  // }
 
 
 

@@ -111,6 +111,8 @@ export class JoinningPageComponent {
     this.teamNameing = true;
     this.stopInterval$.next();
     this.stopInterval$.complete();
+    this.teamName = "Enter Your Team Name";
+
   }
   SaveTeamName() {
     this.inTeamStarting = false;
@@ -136,6 +138,8 @@ export class JoinningPageComponent {
                 // this.inTeamStarting = true;
                 this.teamNameing = false;
                 this.loading = false;
+                this.teamName = "Enter Your Team Name";
+
                 this.teamService.clearGatheringRoomMember().subscribe(
                   res => {
                     this.teamName = "Enter Your Team Name";
