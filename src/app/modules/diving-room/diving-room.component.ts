@@ -65,6 +65,10 @@ export class DivingRoomComponent {
         );
         console.log("Time Started");
       }
+      if (gameStatus == "Empty"){
+        isTimerStarted =false;
+        timerIsSet =false;
+      }
 
 
 

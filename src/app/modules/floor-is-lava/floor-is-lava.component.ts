@@ -67,6 +67,10 @@ export class FloorIsLavaComponent {
         );
         console.log("Time Started");
       }
+      if (this.gameStatus == "Empty"){
+        isTimerStarted =false;
+        timerIsSet =false;
+      }
 
 
 

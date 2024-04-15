@@ -66,6 +66,10 @@ export class DarkRoomComponent {
         console.log("Time Started");
       }
 
+      if (gameStatus == "Empty"){
+        isTimerStarted =false;
+        timerIsSet =false;
+      }
 
 
     }, 1000);
