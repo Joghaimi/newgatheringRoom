@@ -3,7 +3,7 @@
     /* Set the size of the container */
     width: 100%;
     height: 100vh;
-    background-image: url('../../../assets/images/background.jpg');
+    background-image: url('../../../assets/images/background_1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,7 +33,7 @@
 }
 .background-image {
     /* Set the background image using the URL of your image file */
-    background-image: url('../../../assets/images/background.jpg');
+    background-image: url('../../../assets/images/background_1.jpg');
     /* Update the path with your image file */
 
     /* Adjust background properties as needed */

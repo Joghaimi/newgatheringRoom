@@ -9,10 +9,6 @@ import { interval, Subscription } from 'rxjs';
 })
 export class FortRoomComponent {
 
-  // showStartGame = false;
-  // showTimerandScore = true;
-  // goToTheNextRoom = false;
-  // showLoading = false;
   teamName = "FromTheRoom"
   gameName = "Fort Room"
   gameUrl1 = "fort";
