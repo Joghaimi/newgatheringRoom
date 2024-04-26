@@ -70,7 +70,10 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "disableHostCheck": true
+            "disableHostCheck": true,
+            "ssl": true,
+            "sslKey": "key.pem",
+            "sslCert": "cert.pem"
           }
         },
         "extract-i18n": {
