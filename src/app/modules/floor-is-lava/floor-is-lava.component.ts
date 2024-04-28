@@ -76,11 +76,19 @@ export class FloorIsLavaComponent {
     let interval = setInterval(() => {
       if (this.gameTotalTime > 0)
         this.gameTotalTime--;
-      this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+
+      this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
         e => {
-          this.score = e;
+          this.team = e;
+          this.score = this.team.fortRoomScore;
+          this.totalScore = this.team.total;
         }
       );
+      // this.teamService.getScore(this.gameUrl1, this.gameUrl).subscribe(
+      //   e => {
+      //     this.score = e;
+      //   }
+      // );
       if (this.gameTotalTime == 0) {
         clearInterval(interval);
       }

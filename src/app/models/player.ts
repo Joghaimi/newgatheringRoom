@@ -13,4 +13,5 @@ export interface Team {
     divingRoomScore: number,
     darkRoomScore: number,
     floorIsLavaRoomScore: number,
+    total?: number,
 }
