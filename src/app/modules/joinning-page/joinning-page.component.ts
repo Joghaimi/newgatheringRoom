@@ -53,42 +53,14 @@ export class JoinningPageComponent {
             let newPlayer: Player = {
               id: e.id,
               firstName: e.firstName,
-              lastName: e.lastName
+              lastName: e.lastName,
+              mobileNumber:e.mobileNumber
             };
             newplayers.push(newPlayer);
           }
         );
         this.players = newplayers;
-        // Handle the response here
       });
-
-    // }
-    // interval(1000)
-    //   .pipe(
-    //     // Stop the interval when the stopInterval$ emits a value
-    //     takeWhile(() => !this.stopInterval$.closed),
-    //     switchMap(() => this.teamService.getTeamMembers().pipe(
-    //       catchError(error => {
-    //         console.error('Error in API call:', error);
-    //         return []; // Return an empty array or any default value to continue the observable sequence
-    //       })
-    //     ))
-    //   )
-    //   .subscribe(response => {
-    //     let newplayers: Player[] = [];
-    //     response.forEach(
-    //       e => {
-    //         let newPlayer: Player = {
-    //           id: e.id,
-    //           firstName: e.firstName,
-    //           lastName: e.lastName
-    //         };
-    //         newplayers.push(newPlayer);
-    //       }
-    //     );
-    //     this.players = newplayers;
-    //     // Handle the response here
-    //   });
   }
 
   startIntro() {
