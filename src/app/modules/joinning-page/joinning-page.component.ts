@@ -54,7 +54,8 @@ export class JoinningPageComponent {
               id: e.id,
               firstName: e.firstName,
               lastName: e.lastName,
-              mobileNumber:e.mobileNumber
+              mobileNumber:e.mobileNumber,
+              customer_mid:"" 
             };
             newplayers.push(newPlayer);
           }

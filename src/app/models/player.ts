@@ -3,6 +3,7 @@ export interface Player {
     firstName?: string,
     lastName?: string,
     mobileNumber?: string,
+    customer_mid?: string,
 }
 
 
