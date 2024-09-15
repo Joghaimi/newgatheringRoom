@@ -34,13 +34,15 @@ export class FortRoomComponent {
 
   startNewIntro() {
     if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
-    }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+      this.currentState = GatheringRoomGameStage.StartButton
+    } else
+      this.currentState = GatheringRoomGameStage.IntroVideoStarted;
     setTimeout(() => {
       const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
-      video.play();
+      if (video) {
+        video.muted = true;  //
+        video.play();
+      }
     }, 20);
   }
 
@@ -63,11 +65,11 @@ export class FortRoomComponent {
       let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
       if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
 
-        const element = document.getElementById('newIntro');
-        if (element) {
-          console.log("Element");
-          (element as HTMLElement).click();
-        }
+        // const element = document.getElementById('newIntro');
+        // if (element) {
+        //   console.log("Element");
+        //   (element as HTMLElement).click();
+        // }
         // Get Timer 
         this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
           time => {
@@ -95,7 +97,7 @@ export class FortRoomComponent {
       if (gameStatus == "Empty") {
         isTimerStarted = false;
         timerIsSet = false;
-        this.currentState = GatheringRoomGameStage.IntroVideo;
+        // this.currentState = GatheringRoomGameStage.IntroVideo;
       }
 
 
