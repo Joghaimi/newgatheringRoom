@@ -79,6 +79,7 @@ export class JoinningPageComponent {
 
   }
   startNewIntro() {
+    console.log("Clicked");
     if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
       document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
     }
@@ -94,6 +95,7 @@ export class JoinningPageComponent {
 
 
   startIntro() {
+
     this.showVedio = true;
     setTimeout(() => {
       const video = document.getElementById("video") as HTMLVideoElement;;
