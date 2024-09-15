@@ -1,152 +1,198 @@
 /* component.css */
 .background-container {
-    /* Set the size of the container */
-    width: 100%;
-    height: 100vh;
-    background-image: url('../../../assets/images/background_1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Adjust as needed */
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../assets/images/background_1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
 
-    /* Position the container relative */
-    position: relative;
+.team_name {
+  font-size: 75px;
+  text-align: center;
+  padding-top: 7%;
+  color: white;
+}
+
+.your_score {
+  padding-top: 85px;
+}
+
+.your_score_h1 {
+  font-size: 75px;
+  color: white;
+}
+
+.room_time {
+  font-size: 110px;
+  padding-top: 135px;
+  padding-left: 35px;
+  color: #f9ec23;
+}
+
+.current_round {
+  padding-left: 17.5%;
+  padding-top: 6.5%;
+  color: #f9ec23;
+}
+
+.req_score {
+  padding-right: 19%;
+  padding-top: 6.5%;
+  color: #f9ec23;
+}
+
+.req_score_r5 {
+  padding-right: 19%;
+  padding-top: 6.5%;
+  color: #f9ec23;
 }
 
 .background-overlay {
-    /* Set the background color */
-    /* background-color: rgba(0, 0, 0, 0.9); */
-    /* Gray color with 50% opacity */
-
-    /* Set the size to cover the entire container */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
+
 .button-container {
-    /* Position the button container relative */
-    position: relative;
-    /* Set a higher z-index than the background overlay */
-    z-index: 99;
-}
-.background-image {
-    /* Set the background image using the URL of your image file */
-    background-image: url('../../../assets/images/background_1.jpg');
-    /* Update the path with your image file */
-
-    /* Adjust background properties as needed */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    /* Set the size of the container */
-    width: 100%;
-    height: 100%;
+  /* Position the button container relative */
+  position: relative;
+  /* Set a higher z-index than the background overlay */
+  z-index: 99;
 }
 
 .gradient-border-yellow {
-    border-bottom: 3px solid;
-    border-image: linear-gradient(to right,
-            rgba(255, 255, 0, 0),
-            /* transparent yellow at start */
-            rgba(255, 255, 0, 0.5),
-            /* semi-transparent yellow in the middle */
-            rgba(255, 255, 0, 0));
-    border-image-slice: 1;
-    padding-bottom: 5px;
-}
-.gradient-border-blue{
-    border-bottom: 3px solid;
-    border-image: linear-gradient(to right, 
-      rgba(0, 0, 255, 0), 
-      rgba(0, 0, 255, 0.5), 
-      rgba(0, 0, 255, 0));
-    border-image-slice: 1; /* Ensures that the gradient is applied fully */
-    padding-bottom: 5px; /* Adjust padding to match border thickness */
-
-    
+  border-bottom: 3px solid;
+  border-image: linear-gradient(
+    to right,
+    rgba(255, 255, 0, 0),
+    /* transparent yellow at start */ rgba(255, 255, 0, 0.5),
+    /* semi-transparent yellow in the middle */ rgba(255, 255, 0, 0)
+  );
+  border-image-slice: 1;
+  padding-bottom: 5px;
 }
 
+.gradient-border-blue {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(
+    to right,
+    rgba(0, 0, 255, 0),
+    rgba(0, 0, 255, 0.5),
+    rgba(0, 0, 255, 0)
+  );
+  border-image-slice: 1;
+  /* Ensures that the gradient is applied fully */
+  padding-bottom: 5px;
+  /* Adjust padding to match border thickness */
+}
 
 @font-face {
-    font-family: 'Press Start 2p';
-  }
-  body {
-    background-color: black;
-    font-size: 30pt;
-    font-family: 'Press Start 2p';
-  }
-  .video-game-button {
-      text-shadow: 1px 1px pink, -1px -1px maroon;
-  
-      line-height: 1.5em;
-      text-align: center;
-      display: inline-block;
-      width: 1.5em;
-      -webkit-border-radius: .75em;
-      -moz-border-radius: .75em;
-      -o-border-radius: .75em;
-          border-radius: .75em;
-      background-color: red;
-      -webkit-box-shadow:  0 .2em maroon;
-      -moz-box-shadow:  0 .2em maroon;
-      -o-box-shadow:  0 .2em maroon;
-      box-shadow:  0 .2em maroon;
-      color: red;
-      margin: 5px;
-      background-color: red;
-      background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-      background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-      background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-      background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-      cursor: pointer;
-    padding-left: 5px;
-  }
-  .start-btn{
-      text-align: center;
-      display: inline-block;
-      margin:5px;
-      font-weight: bold;
-      padding: 10px 0 10px 10px ;
-      background-color: lightgray;
-      text-shadow: -1px -1px black, 1px 1px white;
-      color: gray;
-      -webkit-border-radius: 7px;
-      -moz-border-radius: 7px;
-      -o-border-radius: 7px;
-      border-radius: 7px;
-      box-shadow: 0 .2em gray; 
-      cursor: pointer;
-  
-  }
-  .video-game-button:active, .start-btn:active {
-      box-shadow: none;
-      position: relative;
-      top: .2em;
+  font-family: "Press Start 2p";
+}
+
+body {
+  background-color: black;
+  font-size: 30pt;
+  font-family: "Press Start 2p";
+}
+
+.video-game-button {
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+
+  line-height: 1.5em;
+  text-align: center;
+  display: inline-block;
+  width: 1.5em;
+  -webkit-border-radius: 0.75em;
+  -moz-border-radius: 0.75em;
+  -o-border-radius: 0.75em;
+  border-radius: 0.75em;
+  background-color: red;
+  -webkit-box-shadow: 0 0.2em maroon;
+  -moz-box-shadow: 0 0.2em maroon;
+  -o-box-shadow: 0 0.2em maroon;
+  box-shadow: 0 0.2em maroon;
+  color: red;
+  margin: 5px;
+  background-color: red;
+  background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+  background-image: -moz-linear-gradient(
+    left top,
+    pink 3%,
+    red 22%,
+    maroon 99%
+  );
+  background-image: -webkit-linear-gradient(
+    left top,
+    pink 3%,
+    red 22%,
+    maroon 99%
+  );
+  background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.start-btn {
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px 0 10px 10px;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 0.2em gray;
+  cursor: pointer;
+}
+
+.video-game-button:active,
+.start-btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 0.2em;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid yellow;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
   }
 
-  .loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid yellow;
-    border-bottom: 16px solid blue;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+  100% {
+    -webkit-transform: rotate(360deg);
   }
-  
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+
+  100% {
+    transform: rotate(360deg);
   }
-  .absent-font{
-    font-family: 'Notably Absent', sans-serif;
-  }
+}
+
+.absent-font {
+  font-family: "Notably Absent", sans-serif;
+}
