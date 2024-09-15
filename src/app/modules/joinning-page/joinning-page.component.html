@@ -1,10 +1,10 @@
 <!-- component.html -->
 <div class="background-container">
     <div class="background-overlay"></div>
-    <div style="min-height: 100vh;" (click)="startNewIntro()"
+    <div style="min-height: 100vh;z-index:2;" (click)="startNewIntro()"
         *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
-        <video id="newIntro" controls  muted loop
-            style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
+        <video id="newIntro" muted loop
+            style="z-index:1;width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
             <source src="../../../assets/Video/xo screen outside .mp4" type="video/mp4">
             <source src="../../../assets/Video/xo screen outside .mp4" type="video/mp4">
         </video>
