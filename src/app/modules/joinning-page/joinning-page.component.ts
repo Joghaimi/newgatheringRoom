@@ -87,8 +87,11 @@ export class JoinningPageComponent {
       this.currentState = GatheringRoomGameStage.IntroVideoStarted;
     setTimeout(() => {
       const video = document.getElementById("newIntro") as HTMLVideoElement;
+      
       if (video)
+      { video.muted = true;  //
         video.play();
+      }
     }, 20);
   }
 
