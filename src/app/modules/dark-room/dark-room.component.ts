@@ -21,26 +21,28 @@ export class DarkRoomComponent {
   nextGame2 = "floorislava";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 ,isAdult:true};
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0, isAdult: true };
   countdownSubscription!: Subscription;
-  get GatheringRoomGameStage(){
+  get GatheringRoomGameStage() {
     return GatheringRoomGameStage;
   }
-  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  currentState: GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
 
   constructor(private teamService: TeamService) {
     this.game();
   }
 
-  
+
   startNewIntro() {
     if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+      this.currentState = GatheringRoomGameStage.StartButton
+    } else {
+      this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+
     }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
     setTimeout(() => {
       const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
+      // video?.requestFullscreen();
       video.play();
     }, 20);
   }
@@ -84,9 +86,9 @@ export class DarkRoomComponent {
         console.log("Time Started");
       }
 
-      if (gameStatus == "Empty"){
-        isTimerStarted =false;
-        timerIsSet =false;
+      if (gameStatus == "Empty") {
+        isTimerStarted = false;
+        timerIsSet = false;
       }
 
 
