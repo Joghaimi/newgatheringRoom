@@ -2,11 +2,34 @@
 .background-container {
   width: 100%;
   height: 100vh;
-  background-image: url('../../../assets/images/background_1.jpg');
+  background-image: url("../../../assets/images/background_1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+}
+
+.team_name {
+  font-size: 75px;
+  text-align: center;
+  padding-top: 7%;
+  color: white;
+}
+
+.your_score {
+  padding-top: 85px;
+}
+
+.your_score_h1 {
+  font-size: 75px;
+  color: white;
+}
+
+.room_time {
+  font-size: 110px;
+  padding-top: 135px;
+  padding-left: 35px;
+  color: #f9ec23;
 }
 
 .background-overlay {
@@ -24,40 +47,40 @@
   z-index: 99;
 }
 
-
 .gradient-border-yellow {
   border-bottom: 3px solid;
-  border-image: linear-gradient(to right,
-      rgba(255, 255, 0, 0),
-      /* transparent yellow at start */
-      rgba(255, 255, 0, 0.5),
-      /* semi-transparent yellow in the middle */
-      rgba(255, 255, 0, 0));
+  border-image: linear-gradient(
+    to right,
+    rgba(255, 255, 0, 0),
+    /* transparent yellow at start */ rgba(255, 255, 0, 0.5),
+    /* semi-transparent yellow in the middle */ rgba(255, 255, 0, 0)
+  );
   border-image-slice: 1;
   padding-bottom: 5px;
 }
 
 .gradient-border-blue {
   border-bottom: 3px solid;
-  border-image: linear-gradient(to right,
-      rgba(0, 0, 255, 0),
-      rgba(0, 0, 255, 0.5),
-      rgba(0, 0, 255, 0));
+  border-image: linear-gradient(
+    to right,
+    rgba(0, 0, 255, 0),
+    rgba(0, 0, 255, 0.5),
+    rgba(0, 0, 255, 0)
+  );
   border-image-slice: 1;
   /* Ensures that the gradient is applied fully */
   padding-bottom: 5px;
   /* Adjust padding to match border thickness */
 }
 
-
 @font-face {
-  font-family: 'Press Start 2p';
+  font-family: "Press Start 2p";
 }
 
 body {
   background-color: black;
   font-size: 30pt;
-  font-family: 'Press Start 2p';
+  font-family: "Press Start 2p";
 }
 
 .video-game-button {
@@ -67,21 +90,31 @@ body {
   text-align: center;
   display: inline-block;
   width: 1.5em;
-  -webkit-border-radius: .75em;
-  -moz-border-radius: .75em;
-  -o-border-radius: .75em;
-  border-radius: .75em;
+  -webkit-border-radius: 0.75em;
+  -moz-border-radius: 0.75em;
+  -o-border-radius: 0.75em;
+  border-radius: 0.75em;
   background-color: red;
-  -webkit-box-shadow: 0 .2em maroon;
-  -moz-box-shadow: 0 .2em maroon;
-  -o-box-shadow: 0 .2em maroon;
-  box-shadow: 0 .2em maroon;
+  -webkit-box-shadow: 0 0.2em maroon;
+  -moz-box-shadow: 0 0.2em maroon;
+  -o-box-shadow: 0 0.2em maroon;
+  box-shadow: 0 0.2em maroon;
   color: red;
   margin: 5px;
   background-color: red;
   background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-  background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-  background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+  background-image: -moz-linear-gradient(
+    left top,
+    pink 3%,
+    red 22%,
+    maroon 99%
+  );
+  background-image: -webkit-linear-gradient(
+    left top,
+    pink 3%,
+    red 22%,
+    maroon 99%
+  );
   background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
   cursor: pointer;
   padding-left: 5px;
@@ -100,16 +133,15 @@ body {
   -moz-border-radius: 7px;
   -o-border-radius: 7px;
   border-radius: 7px;
-  box-shadow: 0 .2em gray;
+  box-shadow: 0 0.2em gray;
   cursor: pointer;
-
 }
 
 .video-game-button:active,
 .start-btn:active {
   box-shadow: none;
   position: relative;
-  top: .2em;
+  top: 0.2em;
 }
 
 .loader {
@@ -143,7 +175,6 @@ body {
   }
 }
 
-
 .absent-font {
-  font-family: 'Notably Absent', sans-serif;
+  font-family: "Notably Absent", sans-serif;
 }

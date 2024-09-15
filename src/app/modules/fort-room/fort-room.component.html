@@ -1,27 +1,36 @@
-<div class="background-container">
-    <div class="background-overlay"></div>
-    <div class="button-container">
-        <div class="row pt-3 fw-bold" style="font-size: 50px;">
-            <div class="col-6" style="padding-left: 7.3%;">{{team.name =="" ? "----" :team.name}}</div>
-        </div>
-        <div class="row align-items-center" style="min-height:75vh">
-            <div class="col-12 text-center px-5">
-                <div class="row">
-                    <h1 class="fw-bolder" style="font-size: 110px;">
-                        Your score 
-                    </h1>
-                    <h1 class="fw-bolder" style="font-size: 110px;">
-                        {{score}}
-                    </h1>
-                </div>
-                <div class="row">
-                    <h1 class="fw-bolder" style="font-size: 110px;">
-                        <span style="font-family: 'alarm clock', sans-serif;">{{ gameTotalTime | timeFormat
-                            }}</span>
-                    </h1>
-                </div>
-
-            </div>
-        </div>
+<div style="min-height: 100vh;" *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
+  <video id="newIntro"
+      (click)="startNewIntro()"
+      (ended)="hideIntroVideo()"
+      muted style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
+      <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
+      <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="background-container" *ngIf="currentState==GatheringRoomGameStage.StartButton">
+  <div class="row pt-3 fw-bold">
+    <div class="col-12 team_name">
+      {{ team.name == "" ? "----" : team.name }}
     </div>
+    <div class="row align-items-center">
+      <div class="col-12 text-center your_score">
+        <h1 class="fw-bolder your_score_h1">Your score</h1>
+      </div>
+      <div class="col-12 text-center">
+        <h1
+          class="fw-bolder"
+          style="font-size: 110px; color: #4995d0; margin-top: -10px"
+        >
+          {{ score }}
+        </h1>
+      </div>
+      <div class="col-12 text-center">
+        <h1 class="fw-bolder room_time">
+          <span style="font-family: 'alarm clock', sans-serif">{{
+            gameTotalTime | timeFormat
+          }}</span>
+        </h1>
+      </div>
+    </div>
+  </div>
 </div>

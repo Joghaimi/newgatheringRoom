@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Player, Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, Player, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, switchMap, Subject } from 'rxjs';
 import { catchError, takeWhile } from 'rxjs/operators';
@@ -11,8 +11,14 @@ import Keyboard from "simple-keyboard";
   styleUrls: ['./joinning-page.component.css']
 })
 export class JoinningPageComponent {
+  get GatheringRoomGameStage() {
+    return GatheringRoomGameStage;
+  }
+
+  currentState: GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  checked = true;
   score = 0;
-  showIntro = true;
+  showIntro = false; // @TODO
   showVedio = false;
   inTeamStarting = false;
   teamNameing = false;
@@ -35,8 +41,13 @@ export class JoinningPageComponent {
   constructor(private teamService: TeamService) {
 
   }
+
+  showIntroVideo() {
+
+  }
+
+ 
   ngOnInit(): void {
-    // if (this.inTeamStarting) {
     interval(1000)
       .pipe(
         switchMap(() => this.teamService.getTeamMembers().pipe(
@@ -54,15 +65,33 @@ export class JoinningPageComponent {
               id: e.id,
               firstName: e.firstName,
               lastName: e.lastName,
-              mobileNumber:e.mobileNumber,
-              customer_mid:"" 
+              mobileNumber: e.mobileNumber,
+              customer_mid: ""
             };
             newplayers.push(newPlayer);
           }
         );
         this.players = newplayers;
       });
+    // this.startNewIntro();
+
+
+
   }
+  startNewIntro() {
+    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+    }
+    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+    setTimeout(() => {
+      const video = document.getElementById("newIntro") as HTMLVideoElement;;
+      video?.requestFullscreen();
+      video.play();
+    }, 20);
+  }
+
+
+
 
   startIntro() {
     this.showVedio = true;
@@ -71,11 +100,14 @@ export class JoinningPageComponent {
       video?.requestFullscreen();
       video.play();
     }, 20);
+    this.currentState = GatheringRoomGameStage.InstructionVideo;
   }
   hideVideo() {
+    this.currentState = GatheringRoomGameStage.TeamNamming;
     this.showVedio = false;
     this.showIntro = false;
     this.inTeamStarting = true;
+    // GatheringRoomGameStage.InstructionVideo
   }
 
   // Save Team Members 
@@ -102,11 +134,18 @@ export class JoinningPageComponent {
               divingRoomScore: 0,
               floorIsLavaRoomScore: 0,
               fortRoomScore: 0,
-              shootingRoomScore: 0
+              shootingRoomScore: 0,
+              isAdult: this.checked
             }
 
             this.teamService.sendScoreToNextRoom(team).subscribe(
               e => {
+
+                this.currentState = GatheringRoomGameStage.IntroVideo;
+
+
+
+
                 this.showIntro = true;
                 // this.inTeamStarting = true;
                 this.teamNameing = false;
@@ -127,7 +166,11 @@ export class JoinningPageComponent {
     }, 3000);
   }
 
+  // checkCheckBoxvalue(event:any) {
+  //   const selectElement = event.target as HTMLSelectElement;
 
+  //   console.log(this.checked);
+  // }
 
 
 

@@ -16,4 +16,16 @@ export interface Team {
     darkRoomScore: number,
     floorIsLavaRoomScore: number,
     total?: number,
+    isAdult: boolean
+}
+
+
+export enum GatheringRoomGameStage {
+    None,
+    IntroVideo,
+    IntroVideoStarted,
+    StartButton,
+    InstructionVideo,
+    TeamNamming,
+    GoToTheNextRoom
 }

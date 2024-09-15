@@ -1,24 +1,24 @@
 <!-- component.html -->
 <div class="background-container">
     <div class="background-overlay"></div>
-    <!-- <div class="card position-fixed topCard"
-        style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70vw;height: 70vh;" *ngIf="showVedio">
-        <div class="card-body">
-         <video  controls (ended)="hideVideo()" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70vw;height: 70vh;" >
-                <source src="../../../assets/Video/Introduction.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-        
-        </div>
-    </div> -->
-    <div class="" *ngIf="showVedio">
+    <div style="min-height: 100vh;" *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
+        <video id="newIntro"
+            (click)="startNewIntro()"
+            muted loop style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
+            <source src="../../../assets/Video/xo screen outside .mp4" type="video/mp4">
+            <source src="../../../assets/Video/xo screen outside .mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+    <div *ngIf="currentState==GatheringRoomGameStage.InstructionVideo">
         <video controls (ended)="hideVideo()" id="video" style="width: 100vh">
             <source src="../../../assets/Video/Introduction.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
-   
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="showIntro">
+
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="currentState == GatheringRoomGameStage.StartButton">
         <div class="container">
             <div class="row">
                 <div class="col-12 d-flex align-items-center justify-content-center" style="height: 80vh;">
@@ -108,38 +108,8 @@
     </div>
 
 
-
-    <div class="d-flex align-items-center" style="min-height: 100vh;" *ngIf="false">
-        <div class="container">
-            <div class="card" style="box-shadow: 2px 1px 10px #f0e40f;">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-12 mt-auto">
-                            <h5>Please Scan Your Id</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card mt-3 mb-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" *ngFor="let player of players; let i=index">{{i +1 + " - " +
-                                player.firstName + " " + player.lastName}}</li>
-                        </ul>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 button-container">
-                            <button class="col-12 btn font-weight-bold" (click)="SaveTeamMembers()"
-                                *ngIf="players.length >=2"
-                                style="color: #f0e40f;background-color: blue;font-size: 15px;">Create Your
-                                Team</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Timer -->
-    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="time">
+    <!-- <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" *ngIf="time">
         <div class="row">
             <div class="row">
                 <div class="col-6 text-center pb-2 pt-3 gradient-border-yellow" style="color: white;">
@@ -162,7 +132,12 @@
             </div>
         </div>
 
-    </div>
+
+
+
+
+
+    </div> -->
 
 
 
@@ -191,9 +166,28 @@
 
         <div class="container text-white ">
             <div class="row text-center">
-                <h2>{{teamName}}</h2>
-                <div class="col-12"><input type="text" class="form-control mb-3" (input)="onInputChange($event)"
+                <div class="row">
+                    <!-- <div class="col-6"></div> -->
+                    <div class="col-12 d-flex justify-content-center align-items-center text-center pb-2"
+                        style="z-index: 10;">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked
+                                style="transform: scale(2);" [(ngModel)]="checked">
+                            <label class="form-check-label fw-bold ps-4" for="flexSwitchCheckChecked"
+                                style="font-size: 20px;">Adult</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <h2>{{teamName}}</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="col-8"><input type="text" class="form-control mb-3" (input)="onInputChange($event)"
                         [(ngModel)]="teamName" placeholder="Name" style="visibility:hidden ;"></div>
+
             </div>
             <div class="container ">
                 <div class="card  mb-4">

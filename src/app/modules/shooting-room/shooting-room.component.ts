@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -19,14 +19,35 @@ export class ShootingRoomComponent {
   nextGame = "diving";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0, isAdult: true };
   countdownSubscription!: Subscription;
   roundNumber = 0;
   requiredScore = 0;
   roundScore = 0;
+  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+
+  get GatheringRoomGameStage(){
+    return GatheringRoomGameStage;
+  }
   constructor(private teamService: TeamService) {
     this.game();
   }
+  startNewIntro() {
+    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+    }
+    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+    setTimeout(() => {
+      const video = document.getElementById("newIntro") as HTMLVideoElement;;
+      video?.requestFullscreen();
+      video.play();
+    }, 20);
+  }
+  hideIntroVideo() {
+    document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  }
+
+
 
   game() {
     var gameStatus = "Empty";
@@ -65,9 +86,9 @@ export class ShootingRoomComponent {
         );
         console.log("Time Started");
       }
-      if (gameStatus == "Empty"){
-        isTimerStarted =false;
-        timerIsSet =false;
+      if (gameStatus == "Empty") {
+        isTimerStarted = false;
+        timerIsSet = false;
       }
 
 

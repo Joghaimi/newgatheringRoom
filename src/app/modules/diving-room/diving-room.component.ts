@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -21,8 +21,29 @@ export class DivingRoomComponent {
   nextGame2 = "darkRoom";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 ,isAdult:true};
   countdownSubscription!: Subscription;
+
+  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+
+  get GatheringRoomGameStage(){
+    return GatheringRoomGameStage;
+  }
+
+  
+  startNewIntro() {
+    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+    }
+    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+    setTimeout(() => {
+      const video = document.getElementById("newIntro") as HTMLVideoElement;;
+      video?.requestFullscreen();
+      video.play();
+    }, 20);
+  }
+
+
 
   constructor(private teamService: TeamService) {
     this.game();

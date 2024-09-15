@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -9,6 +9,10 @@ import { interval, Subscription } from 'rxjs';
 })
 export class FortRoomComponent {
 
+  currentState: GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+
+
+
   teamName = "FromTheRoom"
   gameName = "Fort Room"
   gameUrl1 = "fort";
@@ -16,12 +20,34 @@ export class FortRoomComponent {
   nextGame = "shooting";
   score = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 };
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0, isAdult: true };
   countdownSubscription!: Subscription;
+
+  get GatheringRoomGameStage() {
+    return GatheringRoomGameStage;
+  }
+
 
   constructor(private teamService: TeamService) {
     this.game();
   }
+
+  startNewIntro() {
+    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+    }
+    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+    setTimeout(() => {
+      const video = document.getElementById("newIntro") as HTMLVideoElement;;
+      video?.requestFullscreen();
+      video.play();
+    }, 20);
+  }
+
+  hideIntroVideo() {
+    document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  }
+
 
   game() {
     var gameStatus = "Empty";
@@ -36,6 +62,12 @@ export class FortRoomComponent {
       // =====> Timer 
       let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
       if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
+
+        const element = document.getElementById('newIntro');
+        if (element) {
+          console.log("Element");
+          (element as HTMLElement).click();
+        }
         // Get Timer 
         this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
           time => {
@@ -60,9 +92,10 @@ export class FortRoomComponent {
         );
         console.log("Time Started");
       }
-      if (gameStatus == "Empty"){
-        isTimerStarted =false;
-        timerIsSet =false;
+      if (gameStatus == "Empty") {
+        isTimerStarted = false;
+        timerIsSet = false;
+        this.currentState = GatheringRoomGameStage.IntroVideo;
       }
 
 
@@ -112,26 +145,26 @@ export class FortRoomComponent {
 
 
 
-    // this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-    //   e => {
-    //     this.team = e;
-    //     this.showStartGame = false;
+  // this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+  //   e => {
+  //     this.team = e;
+  //     this.showStartGame = false;
 
-    //     let interval = setInterval(() => {
-    //       // Get Score
-    //       this.teamService.isGameStarted().subscribe(
-    //         e => {
-    //           if (e)
-    //             isGameStarted = true;
-    //         }
-    //       );
-    //       if (isGameStarted) {
-    //         this.startTimer();
-    //         clearInterval(interval);
-    //       }
-    //     }, 1000);
-    //   }
-    // );
+  //     let interval = setInterval(() => {
+  //       // Get Score
+  //       this.teamService.isGameStarted().subscribe(
+  //         e => {
+  //           if (e)
+  //             isGameStarted = true;
+  //         }
+  //       );
+  //       if (isGameStarted) {
+  //         this.startTimer();
+  //         clearInterval(interval);
+  //       }
+  //     }, 1000);
+  //   }
+  // );
   // }
 
 
