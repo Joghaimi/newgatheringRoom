@@ -46,7 +46,7 @@ export class JoinningPageComponent {
 
   }
 
- 
+
   ngOnInit(): void {
     interval(1000)
       .pipe(
@@ -81,13 +81,14 @@ export class JoinningPageComponent {
   startNewIntro() {
     console.log("Clicked");
     if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
-    }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+      this.currentState = GatheringRoomGameStage.StartButton
+      // document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+    } else
+      this.currentState = GatheringRoomGameStage.IntroVideoStarted;
     setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
-      video.play();
+      const video = document.getElementById("newIntro") as HTMLVideoElement;
+      if (video)
+        video.play();
     }, 20);
   }
 
