@@ -1,7 +1,7 @@
 <div style="min-height: 100vh;" *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
   <video id="newIntro"
       (click)="startNewIntro()"
-      muted loop style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
+      muted (ended)="currentState=GatheringRoomGameStage.StartButton" style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
       <source src="../../../assets/Video/THE Marble run room a 2.mp4" type="video/mp4">
       <source src="../../../assets/Video/THE Marble run room a 2.mp4" type="video/mp4">
   </video>
