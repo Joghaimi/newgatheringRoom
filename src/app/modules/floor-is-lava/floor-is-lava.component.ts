@@ -61,7 +61,7 @@ export class FloorIsLavaComponent {
           this.gameStatus = e;
         }
       );
-      
+
       if (this.gameStatus == "NotStarted") {
         this.currentState = RoomGameStage.NotStarted;
         this.startNewIntro();
