@@ -48,31 +48,31 @@ export class JoinningPageComponent {
 
 
   ngOnInit(): void {
-    // interval(1000)
-    //   .pipe(
-    //     switchMap(() => this.teamService.getTeamMembers().pipe(
-    //       catchError(error => {
-    //         console.error('Error in API call:', error);
-    //         return []; // Return an empty array or any default value to continue the observable sequence
-    //       })
-    //     ))
-    //   )
-    //   .subscribe(response => {
-    //     let newplayers: Player[] = [];
-    //     response.forEach(
-    //       e => {
-    //         let newPlayer: Player = {
-    //           id: e.id,
-    //           firstName: e.firstName,
-    //           lastName: e.lastName,
-    //           mobileNumber: e.mobileNumber,
-    //           customer_mid: ""
-    //         };
-    //         newplayers.push(newPlayer);
-    //       }
-    //     );
-    //     this.players = newplayers;
-    //   });
+    interval(1000)
+      .pipe(
+        switchMap(() => this.teamService.getTeamMembers().pipe(
+          catchError(error => {
+            console.error('Error in API call:', error);
+            return []; // Return an empty array or any default value to continue the observable sequence
+          })
+        ))
+      )
+      .subscribe(response => {
+        let newplayers: Player[] = [];
+        response.forEach(
+          e => {
+            let newPlayer: Player = {
+              id: e.id,
+              firstName: e.firstName,
+              lastName: e.lastName,
+              mobileNumber: e.mobileNumber,
+              customer_mid: ""
+            };
+            newplayers.push(newPlayer);
+          }
+        );
+        this.players = newplayers;
+      });
     this.startNewIntro();
 
 
