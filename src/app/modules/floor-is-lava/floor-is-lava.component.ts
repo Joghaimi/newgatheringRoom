@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { GatheringRoomGameStage, Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, RoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -14,34 +14,45 @@ export class FloorIsLavaComponent {
   gameUrl1 = "floor";
   gameUrl = "floorislava";
   nextGame = "dark";
-  score :number|any= 0;
-  totalScore :number|any= 0;
+  score: number | any = 0;
+  totalScore: number | any = 0;
   gameTotalTime = 360;
-  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 ,isAdult:true};
+  team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0, isAdult: true };
   countdownSubscription!: Subscription;
   gameStatus = "Empty";
   constructor(private teamService: TeamService) {
     this.game();
   }
-  get GatheringRoomGameStage(){
-    return GatheringRoomGameStage;
+  get RoomGameStage() {
+    return RoomGameStage;
   }
-  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  currentState: RoomGameStage = RoomGameStage.Started;
+  // startNewIntro() {
+  //   if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+  //     document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  //   }
+  //   this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+  //   setTimeout(() => {
+  //     const video = document.getElementById("newIntro") as HTMLVideoElement;;
+  //     video?.requestFullscreen();
+  //     video.play();
+  //   }, 20);
+  // }
+
   startNewIntro() {
-    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
-    }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
-    setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
+    const video = document.getElementById("newIntro") as HTMLVideoElement;
+    if (video) { //
       video.play();
-    }, 20);
+    }
+  }
+  hideVideo() {
+    this.currentState = RoomGameStage.Started
+    this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl, "InstructionAudioEnded").subscribe();;
   }
 
 
   game() {
- 
+
     let isTimerStarted = false;
     let timerIsSet = false;
     setInterval(() => {
@@ -50,6 +61,14 @@ export class FloorIsLavaComponent {
           this.gameStatus = e;
         }
       );
+      
+      if (this.gameStatus == "NotStarted") {
+        this.currentState = RoomGameStage.NotStarted;
+        this.startNewIntro();
+        this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl, "InstructionAudioStarted").subscribe();;
+      }
+
+
       // =====> Timer 
       let tmerNotSetAndGameStarted = (!timerIsSet && this.gameStatus != "Started");
       if (this.gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
@@ -74,14 +93,14 @@ export class FloorIsLavaComponent {
           e => {
             this.team = e;
             this.totalScore = this.team.darkRoomScore + this.team.divingRoomScore + this.team.darkRoomScore
-            + this.team.floorIsLavaRoomScore + this.team.fortRoomScore ;
+              + this.team.floorIsLavaRoomScore + this.team.fortRoomScore;
           }
         );
         console.log("Time Started");
       }
-      if (this.gameStatus == "Empty"){
-        isTimerStarted =false;
-        timerIsSet =false;
+      if (this.gameStatus == "Empty") {
+        isTimerStarted = false;
+        timerIsSet = false;
       }
 
 
