@@ -71,39 +71,39 @@ export class FortRoomComponent {
 
 
       // =====> Timer 
-      // let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
-      // if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
+      let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
+      if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
 
      
-      //   // Get Timer 
-      //   this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
-      //     time => {
-      //       this.gameTotalTime = time;
-      //       timerIsSet = true;
-      //     }
-      //   );
-      //   this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-      //     e => {
-      //       this.team = e;
-      //     }
-      //   );
-      // }
+        // Get Timer 
+        this.teamService.RoomTime(this.gameUrl1, this.gameUrl).subscribe(
+          time => {
+            this.gameTotalTime = time;
+            timerIsSet = true;
+          }
+        );
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
+      }
 
-      // if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
-      //   this.startTimer();
-      //   isTimerStarted = true;
-      //   this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
-      //     e => {
-      //       this.team = e;
-      //     }
-      //   );
-      //   console.log("Time Started");
-      // }
-      // if (gameStatus == "Empty") {
-      //   isTimerStarted = false;
-      //   timerIsSet = false;
-      //   // this.currentState = GatheringRoomGameStage.IntroVideo;
-      // }
+      if (gameStatus == "Started" && !isTimerStarted && timerIsSet) {
+        this.startTimer();
+        isTimerStarted = true;
+        this.teamService.getTeamMembersAndScore(this.gameUrl1, this.gameUrl).subscribe(
+          e => {
+            this.team = e;
+          }
+        );
+        console.log("Time Started");
+      }
+      if (gameStatus == "Empty") {
+        isTimerStarted = false;
+        timerIsSet = false;
+        // this.currentState = GatheringRoomGameStage.IntroVideo;
+      }
 
 
 
