@@ -31,20 +31,41 @@ export class FortRoomComponent {
   constructor(private teamService: TeamService) {
     this.game();
   }
-
+  ngOnInit(): void {
+    this.startNewIntro();
+  }
   startNewIntro() {
+    console.log("Clicked");
     if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
       this.currentState = GatheringRoomGameStage.StartButton
+      // document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
     } else
       this.currentState = GatheringRoomGameStage.IntroVideoStarted;
     setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      if (video) {
-        // video.muted = true;  //
+      const video = document.getElementById("newIntro") as HTMLVideoElement;
+      
+      if (video)
+      { //
         video.play();
       }
     }, 20);
   }
+
+
+
+  // startNewIntro() {
+  //   if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+  //     this.currentState = GatheringRoomGameStage.StartButton
+  //   } else
+  //     this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+  //   setTimeout(() => {
+  //     const video = document.getElementById("newIntro") as HTMLVideoElement;;
+  //     if (video) {
+  //       // video.muted = true;  //
+  //       video.play();
+  //     }
+  //   }, 20);
+  // }
 
   hideIntroVideo() {
     document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
