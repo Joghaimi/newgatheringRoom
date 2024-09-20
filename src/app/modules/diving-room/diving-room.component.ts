@@ -24,7 +24,7 @@ export class DivingRoomComponent {
   team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 ,isAdult:true};
   countdownSubscription!: Subscription;
 
-  currentState:RoomGameStage = RoomGameStage.None;
+  currentState: RoomGameStage = RoomGameStage.Started;
 
   get RoomGameStage(){
     return RoomGameStage;
