@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { GatheringRoomGameStage, Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, RoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -24,27 +24,37 @@ export class ShootingRoomComponent {
   roundNumber = 0;
   requiredScore = 0;
   roundScore = 0;
-  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  currentState: RoomGameStage = RoomGameStage.Started;
 
-  get GatheringRoomGameStage(){
-    return GatheringRoomGameStage;
+  get RoomGameStage(){
+    return RoomGameStage;
   }
   constructor(private teamService: TeamService) {
     this.game();
   }
+  // startNewIntro() {
+  //   if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+  //     document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  //   }
+  //   this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+  //   setTimeout(() => {
+  //     const video = document.getElementById("newIntro") as HTMLVideoElement;;
+  //     video?.requestFullscreen();
+  //     video.play();
+  //   }, 20);
+  // }
+  // hideIntroVideo() {
+  //   document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  // }
   startNewIntro() {
-    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
-    }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
-    setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
+    const video = document.getElementById("newIntro") as HTMLVideoElement;
+    if (video) { //
       video.play();
-    }, 20);
+    }
   }
-  hideIntroVideo() {
-    document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  hideVideo() {
+    this.currentState = RoomGameStage.Started
+    this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioEnded").subscribe();;
   }
 
 
@@ -59,6 +69,11 @@ export class ShootingRoomComponent {
           gameStatus = e;
         }
       );
+      if(gameStatus =="NotStarted"){
+        this.currentState = RoomGameStage.NotStarted;
+        this.startNewIntro();
+        this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioStarted").subscribe();;
+      }
       // =====> Timer 
       let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
       if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
