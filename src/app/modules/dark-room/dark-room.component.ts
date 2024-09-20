@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { GatheringRoomGameStage, Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, RoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -23,28 +23,38 @@ export class DarkRoomComponent {
   gameTotalTime = 360;
   team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0, isAdult: true };
   countdownSubscription!: Subscription;
-  get GatheringRoomGameStage() {
-    return GatheringRoomGameStage;
+  get RoomGameStage() {
+    return RoomGameStage;
   }
-  currentState: GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  currentState: RoomGameStage = RoomGameStage.Started;
 
   constructor(private teamService: TeamService) {
     this.game();
   }
 
 
-  startNewIntro() {
-    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      this.currentState = GatheringRoomGameStage.StartButton
-    } else {
-      this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+  // startNewIntro() {
+  //   if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+  //     this.currentState = GatheringRoomGameStage.StartButton
+  //   } else {
+  //     this.currentState = GatheringRoomGameStage.IntroVideoStarted;
 
-    }
-    setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      // video?.requestFullscreen();
+  //   }
+  //   setTimeout(() => {
+  //     const video = document.getElementById("newIntro") as HTMLVideoElement;;
+  //     // video?.requestFullscreen();
+  //     video.play();
+  //   }, 20);
+  // }
+  startNewIntro() {
+    const video = document.getElementById("newIntro") as HTMLVideoElement;
+    if (video) { //
       video.play();
-    }, 20);
+    }
+  }
+  hideVideo() {
+    this.currentState = RoomGameStage.Started
+    this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioEnded").subscribe();;
   }
 
 
@@ -58,6 +68,12 @@ export class DarkRoomComponent {
           gameStatus = e;
         }
       );
+      if(gameStatus =="NotStarted"){
+        this.currentState = RoomGameStage.NotStarted;
+        this.startNewIntro();
+        this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioStarted").subscribe();;
+      }
+
       // =====> Timer 
       let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
       if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
