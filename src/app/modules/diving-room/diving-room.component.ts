@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { GatheringRoomGameStage, Team } from 'src/app/models/player';
+import { GatheringRoomGameStage, RoomGameStage, Team } from 'src/app/models/player';
 import { TeamService } from 'src/app/services/TeamService';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -24,23 +24,34 @@ export class DivingRoomComponent {
   team: Team = { name: "-----", darkRoomScore: 0, divingRoomScore: 0, floorIsLavaRoomScore: 0, fortRoomScore: 0, shootingRoomScore: 0 ,isAdult:true};
   countdownSubscription!: Subscription;
 
-  currentState:GatheringRoomGameStage = GatheringRoomGameStage.IntroVideo;
+  currentState:RoomGameStage = RoomGameStage.None;
 
-  get GatheringRoomGameStage(){
-    return GatheringRoomGameStage;
+  get RoomGameStage(){
+    return RoomGameStage;
   }
 
   
+  // startNewIntro() {
+  //   if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
+  //     document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
+  //   }
+  //   this.currentState = GatheringRoomGameStage.IntroVideoStarted;
+  //   setTimeout(() => {
+  //     const video = document.getElementById("newIntro") as HTMLVideoElement;;
+  //     video?.requestFullscreen();
+  //     video.play();
+  //   }, 20);
+  // }
+
   startNewIntro() {
-    if (this.currentState == GatheringRoomGameStage.IntroVideoStarted) {
-      document.exitFullscreen().then(() => { this.currentState = GatheringRoomGameStage.StartButton });
-    }
-    this.currentState = GatheringRoomGameStage.IntroVideoStarted;
-    setTimeout(() => {
-      const video = document.getElementById("newIntro") as HTMLVideoElement;;
-      video?.requestFullscreen();
+    const video = document.getElementById("newIntro") as HTMLVideoElement;
+    if (video) { //
       video.play();
-    }, 20);
+    }
+  }
+  hideVideo() {
+    this.currentState = RoomGameStage.Started
+    this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioEnded").subscribe();;
   }
 
 
@@ -59,6 +70,12 @@ export class DivingRoomComponent {
           gameStatus = e;
         }
       );
+      if(gameStatus =="NotStarted"){
+        this.currentState = RoomGameStage.NotStarted;
+        this.startNewIntro();
+        this.teamService.ChangeRoomStatus(this.gameUrl1, this.gameUrl,"InstructionAudioStarted").subscribe();;
+      }
+
       // =====> Timer 
       let tmerNotSetAndGameStarted = (!timerIsSet && gameStatus != "Started");
       if (gameStatus != "NotStarted" || tmerNotSetAndGameStarted) {
