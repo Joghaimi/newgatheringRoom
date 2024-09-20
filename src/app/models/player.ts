@@ -29,3 +29,10 @@ export enum GatheringRoomGameStage {
     TeamNamming,
     GoToTheNextRoom
 }
+
+export enum RoomGameStage {
+    None,
+    NotStarted,
+    showIntro,
+    Started,
+}

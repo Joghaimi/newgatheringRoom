@@ -17,9 +17,7 @@ export class TeamService {
     // return this.httpClient.get('https://gathering.local:7248/GatheringRoom/GoToTheNextRoom');
     return this.httpClient.get('http://gathering.local:5000/GatheringRoom/GoToTheNextRoom');
   }
-  // sendTeamInfo(){
-  //   return this.httpClient.get('https://fort.local:7248/api/FortRoom/IsOccupied');
-  // }
+
   sendScoreToNextRoom(team: Team) {
     // return this.httpClient.post('https://fort.local:7248/api/FortRoom/ReceiveScore', team);
     return this.httpClient.post('http://fort.local:5000/api/FortRoom/ReceiveScore', team);
@@ -63,9 +61,10 @@ export class TeamService {
   }
 
   GameStatus(roomName1: string, roomName: string) {
-    // return this.httpClient.get('https://' + roomName1 + '.local:7248/api/' + roomName + '/RoomStatus', { responseType: 'text' });
     return this.httpClient.get('http://' + roomName1 + '.local:5000/api/' + roomName + '/RoomStatus', { responseType: 'text' });
-
+  }
+  ChangeRoomStatus(roomName1: string, roomName: string, roomStatus: string): Observable<any> {
+    return this.httpClient.post('http://' + roomName1 + '.local:5000/api/' + roomName + '/RoomStatus?gameStatus=' + roomStatus, roomStatus);
   }
   RoomTime(roomName1: string, roomName: string) {
     // return this.httpClient.get<number>('https://' + roomName1 + '.local:7248/api/' + roomName + '/CurrentTime');

@@ -1,29 +1,6 @@
-<!-- <div style="min-height: 100vh;" *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
-  <video id="newIntro"
-      (click)="startNewIntro()"
-      (ended)="hideIntroVideo()"
-      playsinline autoplay muted loop
-      muted style="width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
-      <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
-      <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
-  </video>
-</div> -->
-
-<!-- <div (click)="startNewIntro()" style="z-index:5;width: 100vw; height: 100vh;position: fixed; top: 0; left: 0;" *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
-</div> -->
-<!-- 
-<div style="min-height: 100vh;z-index:2;" 
-    *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
-    <video id="newIntro" playsinline autoplay
-        (ended)="currentState=GatheringRoomGameStage.StartButton"
-        style="z-index:1;width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
-        <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
-        <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
-    </video>
-</div> -->
 <div style="min-height: 100vh;z-index:2;"
-  *ngIf="currentState==GatheringRoomGameStage.IntroVideo ||currentState==GatheringRoomGameStage.IntroVideoStarted">
-  <video id="newIntro" playsinline autoplay muted loop
+  *ngIf="currentState==RoomGameStage.NotStarted">
+  <video id="newIntro" playsinline autoplay (ended)="hideVideo()"
     style="z-index:1;width: 100vw; height: 100vh; object-fit: cover; position: fixed; top: 0; left: 0;">
     <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
     <source src="../../../assets/Video/the fort room A  2.mp4" type="video/mp4">
@@ -31,7 +8,7 @@
 </div>
 
 
-<div class="background-container" *ngIf="currentState==GatheringRoomGameStage.StartButton">
+<div class="background-container" *ngIf="currentState==RoomGameStage.Started">
   <div class="row pt-3 fw-bold">
     <div class="col-12 team_name">
       {{ team.name == "" ? "----" : team.name }}
